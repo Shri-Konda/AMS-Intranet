@@ -1,0 +1,143 @@
+root - INFO - 11/02/2023 - 10:58:22- ACLOCAL_PATH: C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+root - INFO - 11/02/2023 - 10:58:22- ALLUSERSPROFILE: C:\ProgramData
+root - INFO - 11/02/2023 - 10:58:22- APPDATA: C:\Users\LaisM\AppData\Roaming
+root - INFO - 11/02/2023 - 10:58:22- CHERE_INVOKING: 1
+root - INFO - 11/02/2023 - 10:58:22- CHROME_CRASHPAD_PIPE_NAME: \\.\pipe\crashpad_12684_ZTODITDHXSCVCALX
+root - INFO - 11/02/2023 - 10:58:22- COMMONPROGRAMFILES: C:\Program Files\Common Files
+root - INFO - 11/02/2023 - 10:58:22- COMMONPROGRAMFILES(X86): C:\Program Files (x86)\Common Files
+root - INFO - 11/02/2023 - 10:58:22- COMMONPROGRAMW6432: C:\Program Files\Common Files
+root - INFO - 11/02/2023 - 10:58:22- COMPUTERNAME: LAISAMSBIO
+root - INFO - 11/02/2023 - 10:58:22- COMSPEC: C:\Windows\system32\cmd.exe
+root - INFO - 11/02/2023 - 10:58:22- CONFIG_SITE: C:/Program Files/Git/etc/config.site
+root - INFO - 11/02/2023 - 10:58:22- DISPLAY: needs-to-be-defined
+root - INFO - 11/02/2023 - 10:58:22- DRIVERDATA: C:\Windows\System32\Drivers\DriverData
+root - INFO - 11/02/2023 - 10:58:22- EXEPATH: C:\Program Files\Git
+root - INFO - 11/02/2023 - 10:58:22- HOME: C:\Users\LaisM
+root - INFO - 11/02/2023 - 10:58:22- HOMEDRIVE: C:
+root - INFO - 11/02/2023 - 10:58:22- HOMEPATH: \Users\LaisM
+root - INFO - 11/02/2023 - 10:58:22- HOSTNAME: LaisAMSBIO
+root - INFO - 11/02/2023 - 10:58:22- INFOPATH: C:\Program Files\Git\mingw64\local\info;C:\Program Files\Git\mingw64\share\info;C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
+root - INFO - 11/02/2023 - 10:58:22- LC_CTYPE: en_GB.UTF-8
+root - INFO - 11/02/2023 - 10:58:22- LOCALAPPDATA: C:\Users\LaisM\AppData\Local
+root - INFO - 11/02/2023 - 10:58:22- LOGONSERVER: \\LAISAMSBIO
+root - INFO - 11/02/2023 - 10:58:22- MANPATH: C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
+root - INFO - 11/02/2023 - 10:58:22- MINGW_CHOST: x86_64-w64-mingw32
+root - INFO - 11/02/2023 - 10:58:22- MINGW_PACKAGE_PREFIX: mingw-w64-x86_64
+root - INFO - 11/02/2023 - 10:58:22- MINGW_PREFIX: C:/Program Files/Git/mingw64
+root - INFO - 11/02/2023 - 10:58:22- MSYS: disable_pcon
+root - INFO - 11/02/2023 - 10:58:22- MSYSTEM: MINGW64
+root - INFO - 11/02/2023 - 10:58:22- MSYSTEM_CARCH: x86_64
+root - INFO - 11/02/2023 - 10:58:22- MSYSTEM_CHOST: x86_64-w64-mingw32
+root - INFO - 11/02/2023 - 10:58:22- MSYSTEM_PREFIX: C:/Program Files/Git/mingw64
+root - INFO - 11/02/2023 - 10:58:22- NUMBER_OF_PROCESSORS: 8
+root - INFO - 11/02/2023 - 10:58:22- OLDPWD: C:/inetpub/wwwroot/AMS-Intranet
+root - INFO - 11/02/2023 - 10:58:22- ONEDRIVE: C:\Users\LaisM\OneDrive - AMSBio
+root - INFO - 11/02/2023 - 10:58:22- ONEDRIVECOMMERCIAL: C:\Users\LaisM\OneDrive - AMSBio
+root - INFO - 11/02/2023 - 10:58:22- ORIGINAL_PATH: C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\LaisM\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\LaisM\AppData\Local\Microsoft\WindowsApps;C:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\LaisM\AppData\Local\GitHubDesktop\bin
+root - INFO - 11/02/2023 - 10:58:22- ORIGINAL_TEMP: C:/Users/LaisM/AppData/Local/Temp
+root - INFO - 11/02/2023 - 10:58:22- ORIGINAL_TMP: C:/Users/LaisM/AppData/Local/Temp
+root - INFO - 11/02/2023 - 10:58:22- ORIGINAL_XDG_CURRENT_DESKTOP: undefined
+root - INFO - 11/02/2023 - 10:58:22- OS: Windows_NT
+root - INFO - 11/02/2023 - 10:58:22- PATH: C:\inetpub\wwwroot\AMS-Intranet\venv\lib\site-packages\pywin32_system32;C:\inetpub\wwwroot\AMS-Intranet\venv\lib\site-packages\pywin32_system32;C:\inetpub\wwwroot\AMS-Intranet\venv\lib\site-packages\pywin32_system32;C:\inetpub\wwwroot\AMS-Intranet\venv\Scripts;C:\Users\LaisM\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\LaisM\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\LaisM\AppData\Local\Microsoft\WindowsApps;C:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\LaisM\AppData\Local\GitHubDesktop\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+root - INFO - 11/02/2023 - 10:58:22- PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+root - INFO - 11/02/2023 - 10:58:22- PKG_CONFIG_PATH: C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+root - INFO - 11/02/2023 - 10:58:22- PKG_CONFIG_SYSTEM_INCLUDE_PATH: C:/Program Files/Git/mingw64/include
+root - INFO - 11/02/2023 - 10:58:22- PKG_CONFIG_SYSTEM_LIBRARY_PATH: C:/Program Files/Git/mingw64/lib
+root - INFO - 11/02/2023 - 10:58:22- PLINK_PROTOCOL: ssh
+root - INFO - 11/02/2023 - 10:58:22- PROCESSOR_ARCHITECTURE: AMD64
+root - INFO - 11/02/2023 - 10:58:22- PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+root - INFO - 11/02/2023 - 10:58:22- PROCESSOR_LEVEL: 6
+root - INFO - 11/02/2023 - 10:58:22- PROCESSOR_REVISION: 8c01
+root - INFO - 11/02/2023 - 10:58:22- PROGRAMDATA: C:\ProgramData
+root - INFO - 11/02/2023 - 10:58:22- PROGRAMFILES: C:\Program Files
+root - INFO - 11/02/2023 - 10:58:22- PROGRAMFILES(X86): C:\Program Files (x86)
+root - INFO - 11/02/2023 - 10:58:22- PROGRAMW6432: C:\Program Files
+root - INFO - 11/02/2023 - 10:58:22- PSMODULEPATH: C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+root - INFO - 11/02/2023 - 10:58:22- PUBLIC: C:\Users\Public
+root - INFO - 11/02/2023 - 10:58:22- PWD: C:/inetpub/wwwroot
+root - INFO - 11/02/2023 - 10:58:22- SHELL: C:\Program Files\Git\usr\bin\bash.exe
+root - INFO - 11/02/2023 - 10:58:22- SHLVL: 2
+root - INFO - 11/02/2023 - 10:58:22- SSH_ASKPASS: C:/Program Files/Git/mingw64/bin/git-askpass.exe
+root - INFO - 11/02/2023 - 10:58:22- SYSTEMDRIVE: C:
+root - INFO - 11/02/2023 - 10:58:22- SYSTEMROOT: C:\Windows
+root - INFO - 11/02/2023 - 10:58:22- TEMP: C:\Users\LaisM\AppData\Local\Temp
+root - INFO - 11/02/2023 - 10:58:22- TERM: xterm
+root - INFO - 11/02/2023 - 10:58:22- TERM_PROGRAM: mintty
+root - INFO - 11/02/2023 - 10:58:22- TERM_PROGRAM_VERSION: 3.6.4
+root - INFO - 11/02/2023 - 10:58:22- TMP: C:\Users\LaisM\AppData\Local\Temp
+root - INFO - 11/02/2023 - 10:58:22- TMPDIR: C:\Users\LaisM\AppData\Local\Temp
+root - INFO - 11/02/2023 - 10:58:22- USERDNSDOMAIN: AMSBIO.local
+root - INFO - 11/02/2023 - 10:58:22- USERDOMAIN: AMSBIO
+root - INFO - 11/02/2023 - 10:58:22- USERDOMAIN_ROAMINGPROFILE: AMSBIO
+root - INFO - 11/02/2023 - 10:58:22- USERNAME: LaisM
+root - INFO - 11/02/2023 - 10:58:22- USERPROFILE: C:\Users\LaisM
+root - INFO - 11/02/2023 - 10:58:22- VIRTUAL_ENV: C:\inetpub\wwwroot\AMS-Intranet\venv
+root - INFO - 11/02/2023 - 10:58:22- WINDIR: C:\Windows
+root - INFO - 11/02/2023 - 10:58:22- ZES_ENABLE_SYSMAN: 1
+root - INFO - 11/02/2023 - 10:58:22- _: C:/Users/LaisM/AppData/Local/Programs/Microsoft VS Code/Code.exe
+root - INFO - 11/02/2023 - 10:58:22- LANG: en_US.UTF-8
+root - INFO - 11/02/2023 - 10:58:22- COLORTERM: truecolor
+root - INFO - 11/02/2023 - 10:58:22- GIT_ASKPASS: c:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_GIT_ASKPASS_NODE: C:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\Code.exe
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_GIT_ASKPASS_EXTRA_ARGS: --ms-enable-electron-run-as-node
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_GIT_ASKPASS_MAIN: c:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_GIT_IPC_HANDLE: \\.\pipe\vscode-git-94f9c363f4-sock
+root - INFO - 11/02/2023 - 10:58:22- _OLD_VIRTUAL_PATH: C:\Users\LaisM\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\LaisM\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\LaisM\AppData\Local\Microsoft\WindowsApps;C:\Users\LaisM\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\LaisM\AppData\Local\GitHubDesktop\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+root - INFO - 11/02/2023 - 10:58:22- ELECTRON_NO_ATTACH_CONSOLE: 1
+root - INFO - 11/02/2023 - 10:58:22- ELECTRON_RUN_AS_NODE: 1
+root - INFO - 11/02/2023 - 10:58:22- PROMPT: (venv) $P$G
+root - INFO - 11/02/2023 - 10:58:22- PYTHONIOENCODING: utf-8
+root - INFO - 11/02/2023 - 10:58:22- PYTHONUNBUFFERED: 1
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_AMD_ENTRYPOINT: vs/workbench/api/node/extensionHostProcess
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_CLI: 1
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_CODE_CACHE_PATH: C:\Users\LaisM\AppData\Roaming\Code\CachedData\f1b07bd25dfad64b0167beb15359ae573aecd2cc
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_CRASH_REPORTER_PROCESS_TYPE: extensionHost
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_CWD: C:\inetpub\wwwroot
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_HANDLES_UNCAUGHT_ERRORS: true
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_IPC_HOOK: \\.\pipe\947c32d9bfc69b5dd6fa7647145cdd09-1.83.1-main-sock
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_L10N_BUNDLE_LOCATION: 
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_NLS_CONFIG: {"locale":"en-us","osLocale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+root - INFO - 11/02/2023 - 10:58:22- VSCODE_PID: 12684
+root - INFO - 11/02/2023 - 10:58:22- _OLD_VIRTUAL_PROMPT: $P$G
+root - INFO - 11/02/2023 - 10:58:22- PYDEVD_USE_FRAME_EVAL: NO
+root - INFO - 11/02/2023 - 10:58:22- DJANGO_SETTINGS_MODULE: AMSBIOintranet.settings
+root - INFO - 11/02/2023 - 10:58:22- RUN_MAIN: true
+root - INFO - 11/02/2023 - 10:58:22- SERVER_NAME: ams.com
+root - INFO - 11/02/2023 - 10:58:22- GATEWAY_INTERFACE: CGI/1.1
+root - INFO - 11/02/2023 - 10:58:22- SERVER_PORT: 9000
+root - INFO - 11/02/2023 - 10:58:22- REMOTE_HOST: 
+root - INFO - 11/02/2023 - 10:58:22- CONTENT_LENGTH: 
+root - INFO - 11/02/2023 - 10:58:22- SCRIPT_NAME: 
+root - INFO - 11/02/2023 - 10:58:22- SERVER_PROTOCOL: HTTP/1.1
+root - INFO - 11/02/2023 - 10:58:22- SERVER_SOFTWARE: WSGIServer/0.2
+root - INFO - 11/02/2023 - 10:58:22- REQUEST_METHOD: GET
+root - INFO - 11/02/2023 - 10:58:22- PATH_INFO: /
+root - INFO - 11/02/2023 - 10:58:22- QUERY_STRING: 
+root - INFO - 11/02/2023 - 10:58:22- REMOTE_ADDR: 127.0.0.1
+root - INFO - 11/02/2023 - 10:58:22- CONTENT_TYPE: text/plain
+root - INFO - 11/02/2023 - 10:58:22- HTTP_HOST: 127.0.0.1:9000
+root - INFO - 11/02/2023 - 10:58:22- HTTP_CONNECTION: keep-alive
+root - INFO - 11/02/2023 - 10:58:22- HTTP_CACHE_CONTROL: max-age=0
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_CH_UA: "Chromium";v="118", "Microsoft Edge";v="118", "Not=A?Brand";v="99"
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_CH_UA_MOBILE: ?0
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_CH_UA_PLATFORM: "Windows"
+root - INFO - 11/02/2023 - 10:58:22- HTTP_UPGRADE_INSECURE_REQUESTS: 1
+root - INFO - 11/02/2023 - 10:58:22- HTTP_USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76
+root - INFO - 11/02/2023 - 10:58:22- HTTP_ACCEPT: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_FETCH_SITE: none
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_FETCH_MODE: navigate
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_FETCH_USER: ?1
+root - INFO - 11/02/2023 - 10:58:22- HTTP_SEC_FETCH_DEST: document
+root - INFO - 11/02/2023 - 10:58:22- HTTP_ACCEPT_LANGUAGE: en-GB,en;q=0.9,en-US;q=0.8
+root - INFO - 11/02/2023 - 10:58:22- HTTP_COOKIE: csrftoken=fiU2YH03ZS6uPgQ5IiJnFURq6LEvvO8hfXEfVMPegw6qNBpBVPhtX75aVXLnryq3
+root - INFO - 11/02/2023 - 10:58:22- HTTP_ACCEPT_ENCODING: gzip, deflate
+root - INFO - 11/02/2023 - 10:58:22- wsgi.input: <django.core.handlers.wsgi.LimitedStream object at 0x000001B87C2B6688>
+root - INFO - 11/02/2023 - 10:58:22- wsgi.errors: <_pydevd_bundle.pydevd_io.IORedirector object at 0x000001B86765FB88>
+root - INFO - 11/02/2023 - 10:58:22- wsgi.version: (1, 0)
+root - INFO - 11/02/2023 - 10:58:22- wsgi.run_once: False
+root - INFO - 11/02/2023 - 10:58:22- wsgi.url_scheme: http
+root - INFO - 11/02/2023 - 10:58:22- wsgi.multithread: True
+root - INFO - 11/02/2023 - 10:58:22- wsgi.multiprocess: False
+root - INFO - 11/02/2023 - 10:58:22- wsgi.file_wrapper: <class 'wsgiref.util.FileWrapper'>
+root - INFO - 11/02/2023 - 10:58:22- CSRF_COOKIE: fiU2YH03ZS6uPgQ5IiJnFURq6LEvvO8hfXEfVMPegw6qNBpBVPhtX75aVXLnryq3
+django.utils.autoreload - INFO - C:\inetpub\wwwroot\AMS-Intranet\AMSBIOintranet\AMSBIOintranet\settings.py changed, reloading.
