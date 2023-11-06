@@ -131,7 +131,6 @@ def editSingleProduct(request, pk):
     """ Main function for rendering the Edit Product page! """
     flag = True
     nocategory = False
-    owner = None  # Initialize owner variable
     if request.method == "POST" and 'btnSubmitCode' in request.POST:
         code = request.POST["ProdCode"]
         try:
@@ -139,11 +138,7 @@ def editSingleProduct(request, pk):
             # Case the product was deleted
             if ProductRecords.objects.get(pk=code).delete_flag == 1:
                 flag = True
-                return render(request, 'editsingleprod.html', {'msg': "This product was deleted", 'flag': flag})            
-            # Retrieve supplier name using the suppliername method
-            
-            print('>>>>>>>', owner)
-
+                return render(request, 'editsingleprod.html', {'msg': "This product was deleted", 'flag': flag})
             # Case where no categories are defined.
             if ProductRecords.objects.get(pk=code).category_1 == 0:
                 ProdForm = editProductRecords(code)
