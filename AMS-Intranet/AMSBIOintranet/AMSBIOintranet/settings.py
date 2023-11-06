@@ -14,6 +14,10 @@ from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -85,6 +89,11 @@ WSGI_APPLICATION = 'AMSBIOintranet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+name = os.getenv('NAME')
+user = os.getenv('USER')
+password = os.getenv('PASSWORD')
+port = os.getenv('PORT')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,10 +102,10 @@ DATABASES = {
 
     'sysdb': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AMS_DJANGO',
-        'USER': 'ams_django_importer',
-        'PASSWORD': '6asdasdADSsd',
-        'PORT': '3306',
+        'NAME': name,
+        'USER': user,
+        'PASSWORD': password,
+        'PORT': port,
         'HOST': '10.0.0.20',
         # 'TEST': {
         #     'NAME': 'test_ams',
