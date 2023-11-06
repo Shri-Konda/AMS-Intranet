@@ -11,6 +11,8 @@ def editProductRecords(pk):
     ProdForm = EditProductForm()
     Product = ProductRecords.objects.get(pk=pk)
     ProdForm = EditProductForm(instance=Product)
+    owner = Product.suppliername().upper()
+    ProdForm.initial['owner'] = owner
     ProdForm.fields['product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['supplier_product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['last_updated_user'].widget.attrs['readonly'] = True

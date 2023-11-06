@@ -5,6 +5,7 @@ from django import forms
 # Django class for generating model form for 'ProductRecords' table
 class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
+    owner = forms.CharField(max_length=64, disabled=True, required=False)
 
     def __init__(self, *args, **kwargs):
         super(EditProductForm, self).__init__(*args, **kwargs)
@@ -39,6 +40,7 @@ class EditProductForm(forms.ModelForm):
                   "supplier_category_2",
                   "supplier_category_3",
                   "supplier_lead_time",
+                  "owner",
                   "ct_supplier_id",
                   "delete_flag",
                   "listing_precedence",
