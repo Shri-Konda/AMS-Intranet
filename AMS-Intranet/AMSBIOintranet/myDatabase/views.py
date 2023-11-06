@@ -1,4 +1,4 @@
-import json
+import json, os
 import getpass
 from datetime import datetime
 
@@ -104,7 +104,9 @@ def FormSubmit(request):
     form_data.pop('csrfmiddlewaretoken')
     if 'supplier_product_code' in form_data.keys():
         form_data['last_updated_user'] = getpass.getuser().upper()
-        # form_data['last_updated_user'] = request.user.username
+        #Getpass is not display who made the change on the website. Trying to see if os.getenv will work
+        local_username = os.getenv('USERPROFILE').split(os.path.sep)[2]
+        form_data['last_updated_user'] =local_username
         form_data['last_change_date'] = datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S")
         Product = ProductRecords.objects.get(pk=form_data['product_code'])
