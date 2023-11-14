@@ -11,6 +11,17 @@ from math import ceil
 
 from homepage.models import liveCurrencyRate
 
+class SupplierBumMapping(models.Model):
+    supplier_name = models.CharField(db_column='supplier_name', max_length=64, primary_key=True)
+    bum = models.CharField(db_column='bum', max_length=64)
+    
+    def __str__(self):
+        return self.supplier_name
+
+    class Meta:
+        db_table = 'supplier_bum_mapping'
+        app_label = 'myDatabase'
+        verbose_name_plural = "Supplier Bum Mapping"
 
 class Currencies(models.Model):
     # Field name made lowercase.
@@ -143,6 +154,15 @@ class ProductRecords(models.Model):
         db_table = 'product_records'
         app_label = 'myDatabase'
 
+    def bumName(self, supplierName):
+        try:
+            bum = SupplierBumMapping.objects.get(pk=supplierName).bum
+            print("!!!!!!!!!", supplierName, bum)
+            return bum
+        except:
+            print("?????", supplierName)
+            return 'None'
+    
     def suppliername(self):
         return DataOwners.objects.get(pk=self.ct_supplier_id).owner
 

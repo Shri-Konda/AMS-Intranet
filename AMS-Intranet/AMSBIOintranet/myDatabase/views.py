@@ -134,7 +134,7 @@ def editSingleProduct(request, pk):
     if request.method == "POST" and 'btnSubmitCode' in request.POST:
         code = request.POST["ProdCode"]
         try:
-            owner = ProductRecords.objects.get(pk=code).suppliername()
+            # owner = ProductRecords.objects.get(pk=code).suppliername()
             # Case the product was deleted
             if ProductRecords.objects.get(pk=code).delete_flag == 1:
                 flag = True
