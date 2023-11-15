@@ -6,7 +6,7 @@ from django import forms
 class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
     owner = forms.CharField(max_length=64, disabled=True, required=False)
-    bum = forms.CharField(max_length=64, disabled=True, required=False)
+    bum = forms.CharField(max_length=64, disabled=False, required=False)
 
 
     def __init__(self, *args, **kwargs):

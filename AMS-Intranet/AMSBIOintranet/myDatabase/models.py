@@ -157,10 +157,8 @@ class ProductRecords(models.Model):
     def bumName(self, supplierName):
         try:
             bum = SupplierBumMapping.objects.get(pk=supplierName).bum
-            print("!!!!!!!!!", supplierName, bum)
             return bum
         except:
-            print("?????", supplierName)
             return 'None'
     
     def suppliername(self):

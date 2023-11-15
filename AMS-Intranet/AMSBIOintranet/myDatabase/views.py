@@ -55,6 +55,9 @@ def search(request):
     obj = ProductRecordsTable(ProductRecords.objects.all()[8:])
     RequestConfig(request, paginate={
                   "paginator_class": LazyPaginator, "per_page": 10}).configure(obj)
+    obj_deleted_items = ProductRecordsTable(ProductRecords.objects.all()[8:])
+    RequestConfig(request, paginate={
+                  "paginator_class": LazyPaginator, "per_page": 10}).configure(obj)
     msg = True
     if request.method == "POST":
         code = request.POST['Prod']
@@ -67,19 +70,25 @@ def search(request):
             # instance limit set to 100
             obj = ProductRecordsTable(ProductRecords.objects.filter(
                 description__icontains=desc).filter(delete_flag=0).exclude(pk__in=product_codes_with_forward_slash)[:100])
-            return render(request, 'search.html', {'obj': obj, 'msg': msg})
+            obj_deleted_items = ProductRecordsTable(ProductRecords.objects.filter(
+                description__icontains=desc).filter(delete_flag=1).exclude(pk__in=product_codes_with_forward_slash)[:100])
+            return render(request, 'search.html', {'obj': obj, 'obj_deleted_items': obj_deleted_items, 'msg': msg})
         elif len(desc) == 0 and len(code) > 0:
             # instance limit set to 100
             obj = ProductRecordsTable(ProductRecords.objects.filter(Q(product_code__icontains=code) | Q(supplier_product_code__icontains=code)
                                                                     ).filter(delete_flag=0).exclude(pk__in=product_codes_with_forward_slash)[:100])
-            return render(request, 'search.html', {'obj': obj, 'msg': msg})
+            obj_deleted_items = ProductRecordsTable(ProductRecords.objects.filter(Q(product_code__icontains=code) | Q(supplier_product_code__icontains=code)
+                                                                    ).filter(delete_flag=1).exclude(pk__in=product_codes_with_forward_slash)[:100])
+            return render(request, 'search.html', {'obj': obj, 'obj_deleted_items': obj_deleted_items, 'msg': msg})
         else:
             # instance limit set to 100
             obj = ProductRecordsTable(ProductRecords.objects.filter(
                 product_code__icontains=code).filter(description__icontains=desc).filter(delete_flag=0).exclude(pk__in=product_codes_with_forward_slash)[:100])
-            return render(request, 'search.html', {'obj': obj, 'msg': msg})
+            obj_deleted_items = ProductRecordsTable(ProductRecords.objects.filter(
+                product_code__icontains=code).filter(description__icontains=desc).filter(delete_flag=1).exclude(pk__in=product_codes_with_forward_slash)[:100])
+            return render(request, 'search.html', {'obj': obj, 'obj_deleted_items': obj_deleted_items, 'msg': msg})
     else:
-        return render(request, 'search.html', {'obj': obj, 'msg': msg})
+        return render(request, 'search.html', {'obj': obj, 'obj_deleted_items': obj_deleted_items, 'msg': msg})
 
 
 def currencyValue(request):
@@ -134,7 +143,6 @@ def editSingleProduct(request, pk):
     if request.method == "POST" and 'btnSubmitCode' in request.POST:
         code = request.POST["ProdCode"]
         try:
-            # owner = ProductRecords.objects.get(pk=code).suppliername()
             # Case the product was deleted
             if ProductRecords.objects.get(pk=code).delete_flag == 1:
                 flag = True

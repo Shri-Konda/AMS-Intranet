@@ -13,7 +13,6 @@ def editProductRecords(pk):
     ProdForm = EditProductForm(instance=Product)
     owner = Product.suppliername()
     bum = Product.bumName(owner)
-    print(bum, "<<<<<<<<<<<<")
     ProdForm.initial['bum'] = bum
     ProdForm.initial['owner'] = owner
     ProdForm.fields['product_code'].widget.attrs['readonly'] = True
