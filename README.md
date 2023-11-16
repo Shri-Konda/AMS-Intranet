@@ -22,9 +22,17 @@
 
 1.  Install Python(ver=3.7.5) for all users on Windows
 2.  Open CMD and install all requirements mentioned in _requirements.txt_ using <code>pip install -r requirements.txt</code>.
-3.  After all the libraries are successfully installed, Install _wfastcgi_ library as well, <code>pip install  _wfastcgi_</code><br>
+3.  After all the libraries are successfully installed, Install _wfastcgi_ and python_dotenv libraries as well, <code>pip install  _wfastcgi_ _python_dotenv_</code><br>
 _Note: If error is thrown at the time of installing libraries, try upgrading pip by <code>pip install --upgrade pip</code>, then start from *STEP 2*_
 4.  Install *IIS* on Windows
+
+    Enable Internet Information Services (IIS) through the Control Panel:
+        Open Control Panel.
+        Go to "Programs" and select "Turn Windows features on or off."
+        Scroll down and find "Internet Information Services."
+        Expand the tree and enable the required features under "Web Management Tools" and "World Wide Web Services."
+        Make sure to select "CGI" under "World Wide Web Services."
+        Click "OK" to apply the changes.
 
 ###    2.  Cloning Project from Git
 
@@ -39,7 +47,7 @@ _Note: Make sure Git is already installed, the above commad will clone/download 
 _Note: Before running the command make sure no other wfastcgi app is running in FastCGI module of IIS_
 
 ###    4.  Adding web.config
-8.  Copy the Python path returned in *STEP 8*, and replace the scriptProcessor="<code>to be filled in</code>" in <code>web.config-template</code>
+8.  Copy the Python path returned in *STEP 8*, and replace the scriptProcessor="<code>to be filled in</code>" in <code>web.config-template. Or, if using a python virtual enviroment, copy the path from that folder (same for wfastcgi)</code>
 9.  If necessary edit the remaining settings in <code>web.config-template</code> then save it as <code>web.config</code> in the _C:/inetpub/wwwroot/_ directory. It should NOT sit inside _AMSBIOintranet/_
     1.  Edit project PYTHONPATH (path to project, should be *C:/inetpub/wwwroot/AMS-Intranet/AMSBIOintranet*)
     2.  Edit WSGI_HANDLER (located in your wsgi.py, should be *AMSBIOintranet.wsgi.application*)
@@ -67,4 +75,23 @@ _Note: Before running the command make sure no other wfastcgi app is running in 
     4.  You will see add MIME Type box and put woff2 extension in the file extension ".woff2" and MIME type as "application/font-woff2" as well.
     5.  Save it and restart the server
 
-###    8.  Find the website at <code>http://localhost:81</code>
+###    8.  Configure Database Credentials
+
+1. In the root of your project directory (where `manage.py` is located), create a new file named `.env`.
+
+2. Open the `.env` file in a text editor and add the following lines, replacing the placeholders with your actual database credentials:
+
+    For example:
+
+    ```dotenv
+    DB_NAME=mydatabase
+    DB_USER=myuser
+    DB_PASSWORD=mypassword
+    DB_PORT=5432
+    ```
+
+3. Security Note:
+
+   Keep the `.env` file in your project's `.gitignore` to avoid accidentally exposing 
+
+###    9.  Find the website at <code>http://localhost:81</code>
