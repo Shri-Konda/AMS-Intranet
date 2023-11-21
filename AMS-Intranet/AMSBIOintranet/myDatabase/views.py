@@ -175,7 +175,7 @@ def editSingleProduct(request, pk):
                     context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 return render(request, 'editsingleprod.html', context)
-        except:
+        except():
             flag = True
             return render(request, 'editsingleprod.html', {'msg': "Enter a valid product code", 'flag': flag})
     else:
@@ -189,14 +189,29 @@ def editSingleProduct(request, pk):
                            'NoTechCategory': noTechCategory, 'nocategory': nocategory}
                 return render(request, 'editsingleprod.html', context)
             else:
-                cat = loadCategory(pk)  # generating level 1 category
-                attributes = ['id_product_code'] + \
-                    ['id_' + ele for ele in list(cat[0].values())[0]]
-                ProdForm = editProductRecords(pk)
-                TechForm = editTechDetails(pk)
-                flag = False
-                TwoCategories = True
-                if len(cat) > 1:  # check if 2 categories exists
+                cat = None
+                ProdForm = None
+                TechForm = None
+                flag = None
+                TwoCategories = None
+                try:
+                    cat = loadCategory(pk)  # generating level 1 category
+                    attributes = ['id_product_code'] + \
+                        ['id_' + ele for ele in list(cat[0].values())[0]]
+                    ProdForm = editProductRecords(pk)
+                    TechForm = editTechDetails(pk)
+                    flag = False
+                    TwoCategories = True
+                except Exception as e:
+                    print(e)
+                    #Case the product is not in the produc_records_tech table
+                    cat = loadCategory(pk)  # generating level 1 category
+                    attributes = ['id_product_code'] + \
+                        ['id_' + ele for ele in list(cat[0].values())[0]]
+                    ProdForm = editProductRecords(pk)
+                    flag = False
+                    TwoCategories = True
+                if len(cat) > 1:  # check if 2 categories exists 
                     attributes2 = [
                         'id_' + ele for ele in list(cat[1].values())[0]]
                     merged_attrs = attributes + \
@@ -208,7 +223,7 @@ def editSingleProduct(request, pk):
                     context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 return render(request, 'editsingleprod.html', context)
-        except:
+        except Exception as e:
             flag = True
             return render(request, 'editsingleprod.html', {'msg': "Enter a valid product code", 'flag': flag})
 
