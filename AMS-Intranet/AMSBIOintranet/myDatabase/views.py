@@ -105,6 +105,7 @@ def currencyValue(request):
 
 def FormSubmit(request):
     """ Helper function for submitting a form! | Ajax Call """
+    print('i am here')
     json_data = json.loads(request.POST['data'])
     form_data = {}
     for ele in json_data:
@@ -175,7 +176,7 @@ def editSingleProduct(request, pk):
                     context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 return render(request, 'editsingleprod.html', context)
-        except():
+        except:
             flag = True
             return render(request, 'editsingleprod.html', {'msg': "Enter a valid product code", 'flag': flag})
     else:
