@@ -113,11 +113,7 @@ def FormSubmit(request):
     form_data.pop('csrfmiddlewaretoken')
     if 'supplier_product_code' in form_data.keys():
         getpass.getuser().upper()
-        username = os.getenv('USERPROFILE').split(os.path.sep)[2]        
-        if request.META.get('SERVER_NAME').upper() == 'AMS-DC2019':
-            form_data['last_updated_user'] = form_data['username'].upper()          
-        else:
-            form_data['last_updated_user'] = username.upper()
+        form_data['last_updated_user'] = form_data['username'].upper()       
         form_data['last_change_date'] = datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S")
         Product = ProductRecords.objects.get(pk=form_data['product_code'])
