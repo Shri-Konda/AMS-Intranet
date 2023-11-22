@@ -30,7 +30,7 @@ SECRET_KEY = '3u1gjabugnf!+op062j%@^=c=ldk)d6!0e97@f&&7jlb+w0+q='
 # DEBUG = False
 ALLOWED_HOSTS = ['intranet.amsbio.com', 'localhost', 'amsbio.com', '127.0.0.1']
 
-DEBUG = True
+DEBUG = False
 # ALLOWED_HOSTS = []
 
 
