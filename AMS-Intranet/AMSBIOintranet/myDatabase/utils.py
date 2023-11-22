@@ -13,13 +13,16 @@ def editProductRecords(pk):
     ProdForm = EditProductForm(instance=Product)
     owner = Product.suppliername()
     bum = Product.bumName(owner)
+    username = ''
     ProdForm.initial['bum'] = bum
     ProdForm.initial['owner'] = owner
+    ProdForm.initial['username'] = username
     ProdForm.fields['product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['supplier_product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['last_updated_user'].widget.attrs['readonly'] = True
     ProdForm.fields['last_change_date'].widget.attrs['readonly'] = True
     ProdForm.fields['ct_supplier_id'].widget.attrs['readonly'] = True
+    ProdForm.fields['username'].widget.attrs['placeholder'] = 'Type your name before submitting the changes'
     return ProdForm
 
 

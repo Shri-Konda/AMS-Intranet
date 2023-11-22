@@ -159,7 +159,6 @@ class ProductRecords(models.Model):
             bum = SupplierBumMapping.objects.get(pk=supplierName).bum
             return bum
         except Exception as e:
-            print(e, 'bum <<<<')
             return 'None'
     
     def suppliername(self):

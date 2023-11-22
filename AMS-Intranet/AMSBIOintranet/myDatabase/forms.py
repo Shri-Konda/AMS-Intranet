@@ -7,6 +7,7 @@ class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
     owner = forms.CharField(max_length=64, disabled=True, required=False)
     bum = forms.CharField(max_length=64, disabled=True, required=False)
+    username = forms.CharField(max_length=64, disabled=False, required=True)
 
 
     def __init__(self, *args, **kwargs):
@@ -17,7 +18,8 @@ class EditProductForm(forms.ModelForm):
 
     class Meta:
         model = ProductRecords
-        fields = ["product_code",
+        fields = ["username",
+                  "product_code",
                   "supplier_product_code",
                   "description",
                   "long_description",

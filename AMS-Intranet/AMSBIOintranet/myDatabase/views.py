@@ -105,7 +105,6 @@ def currencyValue(request):
 
 def FormSubmit(request):
     """ Helper function for submitting a form! | Ajax Call """
-    print('i am here')
     json_data = json.loads(request.POST['data'])
     form_data = {}
     for ele in json_data:
@@ -113,10 +112,12 @@ def FormSubmit(request):
         form_data[temp[0]] = temp[1]
     form_data.pop('csrfmiddlewaretoken')
     if 'supplier_product_code' in form_data.keys():
-        form_data['last_updated_user'] = getpass.getuser().upper()
-        #Getpass is not display who made the change on the website. Trying to see if os.getenv will work
-        local_username = os.getenv('USERPROFILE').split(os.path.sep)[2]
-        form_data['last_updated_user'] =local_username
+        getpass.getuser().upper()
+        username = os.getenv('USERPROFILE').split(os.path.sep)[2]        
+        if request.META.get('SERVER_NAME').upper() == 'AMS-DC2019':
+            form_data['last_updated_user'] = form_data['username'].upper()          
+        else:
+            form_data['last_updated_user'] = username.upper()
         form_data['last_change_date'] = datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S")
         Product = ProductRecords.objects.get(pk=form_data['product_code'])
