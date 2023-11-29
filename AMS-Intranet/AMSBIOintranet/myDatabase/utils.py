@@ -21,7 +21,7 @@ def editProductRecords(pk):
     ProdForm.fields['supplier_product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['last_updated_user'].widget.attrs['readonly'] = True
     ProdForm.fields['last_change_date'].widget.attrs['readonly'] = True
-    ProdForm.fields['ct_supplier_id'].widget.attrs['readonly'] = True
+    ProdForm.fields['purchase_nett_price'].widget.attrs['readonly'] = True
     ProdForm.fields['username'].widget.attrs['placeholder'] = 'Type your name before submitting the changes'
     return ProdForm
 
