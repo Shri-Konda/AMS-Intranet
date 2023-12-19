@@ -14,7 +14,6 @@ def editProductRecords(pk):
     owner = Product.suppliername()
     bum = Product.bumName(owner)
     bundle_components = Product.bundle_components(pk)
-    print(pk, "<<<<<<<<<<<<<<<<<<<<<<<<",bundle_components)
     username = ''
     ProdForm.initial['bum'] = bum
     ProdForm.initial['owner'] = owner
@@ -26,6 +25,10 @@ def editProductRecords(pk):
     ProdForm.fields['last_change_date'].widget.attrs['readonly'] = True
     ProdForm.fields['purchase_nett_price'].widget.attrs['readonly'] = True
     ProdForm.fields['username'].widget.attrs['placeholder'] = 'Type your name before submitting the changes'
+
+    if bundle_components == 'Not applicable':
+        del ProdForm.fields['bundle']
+
     return ProdForm
 
 
