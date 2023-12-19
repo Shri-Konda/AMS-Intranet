@@ -23,6 +23,18 @@ class SupplierBumMapping(models.Model):
         app_label = 'myDatabase'
         verbose_name_plural = "Supplier Bum Mapping"
 
+class Bundles(models.Model):
+    bundle_code = models.CharField(db_column='bundle_code', max_length=64, primary_key=True)
+    components = models.CharField(db_column='components', max_length=64)
+    
+    def __str__(self):
+        return self.components
+
+    class Meta:
+        db_table = 'bundles'
+        app_label = 'myDatabase'
+        verbose_name_plural = "Bundles"
+
 class Currencies(models.Model):
     # Field name made lowercase.
     currencyid = models.AutoField(db_column='CurrencyID', primary_key=True)
@@ -160,6 +172,14 @@ class ProductRecords(models.Model):
             return bum
         except Exception as e:
             return 'None'
+        
+    def bundle_components(self, product_code):
+        try:
+            components = Bundles.objects.get(pk=product_code).components
+            return components
+        except Exception as e:
+            print(e)
+            return 'Not applicable'
     
     def suppliername(self):
         return DataOwners.objects.get(pk=self.ct_supplier_id).owner

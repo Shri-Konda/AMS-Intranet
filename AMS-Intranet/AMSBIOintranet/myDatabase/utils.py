@@ -13,9 +13,12 @@ def editProductRecords(pk):
     ProdForm = EditProductForm(instance=Product)
     owner = Product.suppliername()
     bum = Product.bumName(owner)
+    bundle_components = Product.bundle_components(pk)
+    print(pk, "<<<<<<<<<<<<<<<<<<<<<<<<",bundle_components)
     username = ''
     ProdForm.initial['bum'] = bum
     ProdForm.initial['owner'] = owner
+    ProdForm.initial['bundle'] = bundle_components
     ProdForm.initial['username'] = username
     ProdForm.fields['product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['supplier_product_code'].widget.attrs['readonly'] = True

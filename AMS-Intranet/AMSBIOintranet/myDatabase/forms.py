@@ -7,6 +7,7 @@ class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
     owner = forms.CharField(max_length=64, disabled=True, required=False)
     bum = forms.CharField(max_length=64, disabled=True, required=False)
+    bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
 
 
@@ -24,6 +25,7 @@ class EditProductForm(forms.ModelForm):
                   "description",
                   "long_description",
                   "packsize",
+                  "bundle",
                   "purchase_nett_price",
                   "supplier_list_price",
                   "sell_price_gbp",
