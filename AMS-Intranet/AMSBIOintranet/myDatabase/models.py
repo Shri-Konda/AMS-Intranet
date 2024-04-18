@@ -13,7 +13,7 @@ from homepage.models import liveCurrencyRate
 
 class SupplierBumMapping(models.Model):
     supplier_name = models.CharField(db_column='supplier_name', max_length=64, primary_key=True)
-    bum = models.CharField(db_column='bum', max_length=64)
+    business_unit_manager = models.CharField(db_column='bum', max_length=64)
     
     def __str__(self):
         return self.supplier_name
@@ -168,8 +168,8 @@ class ProductRecords(models.Model):
 
     def bumName(self, supplierName):
         try:
-            bum = SupplierBumMapping.objects.get(pk=supplierName).bum
-            return bum
+            business_unit_manager = SupplierBumMapping.objects.get(pk=supplierName).business_unit_manager
+            return business_unit_manager
         except Exception as e:
             return 'None'
         

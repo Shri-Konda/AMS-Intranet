@@ -12,10 +12,10 @@ def editProductRecords(pk):
     Product = ProductRecords.objects.get(pk=pk)
     ProdForm = EditProductForm(instance=Product)
     owner = Product.suppliername()
-    bum = Product.bumName(owner)
+    business_unit_manager = Product.bumName(owner)
     bundle_components = Product.bundle_components(pk)
     username = ''
-    ProdForm.initial['bum'] = bum
+    ProdForm.initial['business_unit_manager'] = business_unit_manager
     ProdForm.initial['owner'] = owner
     ProdForm.initial['bundle'] = bundle_components
     ProdForm.initial['username'] = username
