@@ -1,5 +1,6 @@
 .vscode
 %SystemRoot%system32inetsrvappcmd
 intranet.log
-.env3.7
+venv3.7
+venv
 .env
