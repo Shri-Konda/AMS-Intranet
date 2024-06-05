@@ -10,6 +10,7 @@ from django.contrib import messages
 from API.call import oAuth_magento
 
 
+############################################## UNCOMMENT THIS IF MAGENTO IS NOT WORKING THE AUTHENTICATION #####################################
 def index(request):    
     # Placeholder response without Magento authentication
     default_response = [
@@ -22,6 +23,9 @@ def index(request):
     context = {'response': default_response, 'col_headers': col_headers, 'flag': True}
     
     return render(request, 'index.html', context) 
+
+####################################################################################################################################################
+
 # def index(request):    
 #     """ Main function for rendering the homepage! """
 #     logging.basicConfig(filename='intranet.log',filemode='w',format='%(name)s - %(levelname)s - %(message)s',level=logging.INFO)

@@ -9,6 +9,19 @@ class EditProductForm(forms.ModelForm):
     business_unit_manager = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
+    # # Use TypedChoiceField for the delete_flag
+    # DELETE_FLAG_CHOICES = [
+    #     (True, 'Yes'),
+    #     (False, 'No'),
+    # ]
+    # delete_flag = forms.TypedChoiceField(
+    #     choices=DELETE_FLAG_CHOICES,
+    #     coerce=lambda x: x == 'True',
+    #     required=False,
+    #     widget=forms.Select
+    #     label = 'Discontinued'
+
+    # )
 
 
     def __init__(self, *args, **kwargs):
@@ -16,12 +29,18 @@ class EditProductForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs.update(
                 {'class': 'form-control', 'rows': '0', 'cols': '10'})
+            
+        # if self.instance:
+        #     owner = self.instance.owner
+        #     ct_supplier_id = self.instance.ct_supplier_id
+        #     self.fields['owner'].initial = f"{owner} + {ct_supplier_id}"
 
     class Meta:
         model = ProductRecords
         fields = ["username",
                   "product_code",
                   "supplier_product_code",
+                  "delete_flag",
                   "description",
                   "long_description",
                   "packsize",
@@ -39,28 +58,27 @@ class EditProductForm(forms.ModelForm):
                   "category_1",
                   "category_2",
                   "research_area_1",
-                  "research_area_2",
-                  "research_area_3",
-                  "research_area_4",
-                  "supplier_category_1",
-                  "supplier_category_2",
-                  "supplier_category_3",
-                  "supplier_lead_time",
+                #   "research_area_2",
+                #   "research_area_3",
+                #   "research_area_4",
+                #   "supplier_category_1",
+                #   "supplier_category_2",
+                #   "supplier_category_3",
+                #   "supplier_lead_time",
                   "owner",
                   "business_unit_manager",
-                  "ct_supplier_id",
-                  "delete_flag",
-                  "listing_precedence",
+                #   "ct_supplier_id",
+                #   "listing_precedence",
                   "last_updated_user",
                   "last_change_date",
-                  "price_calculation_type",
-                  "website_flag",
-                  "new_product_flag",
-                  "previous_purchase_price",
-                  "price_change_flag",
-                  "price_change_percent",
-                  "is_in_website",
-                  "is_in_odoo",
+                #   "price_calculation_type",
+                #   "website_flag",
+                #   "new_product_flag",
+                #   "previous_purchase_price",
+                #   "price_change_flag",
+                #   "price_change_percent",
+                #   "is_in_website",
+                #   "is_in_odoo",
                   "special_shipping"]
 
 

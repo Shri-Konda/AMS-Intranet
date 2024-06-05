@@ -128,6 +128,7 @@ class ProductRecords(models.Model):
     description = models.TextField(blank=True, null=True)
     long_description = models.TextField(blank=True, null=True)
     packsize = models.CharField(max_length=256, blank=True, null=True)
+    delete_flag = models.BooleanField(verbose_name="Discontinued", blank=True, null=True)
     purchase_nett_price = models.FloatField(blank=True, null=True)
     supplier_list_price = models.FloatField(blank=True, null=True)
     sell_price_gbp = models.FloatField(blank=True, null=True)
@@ -148,7 +149,6 @@ class ProductRecords(models.Model):
     supplier_category_3 = models.TextField(blank=True, null=True)
     supplier_lead_time = models.TextField(blank=True, null=True)
     ct_supplier_id = models.IntegerField(blank=True, null=True)
-    delete_flag = models.IntegerField(blank=True, null=True)
     listing_precedence = models.IntegerField(blank=True, null=True)
     last_updated_user = models.CharField(max_length=64, blank=True, null=True)
     last_change_date = models.DateTimeField(blank=True, null=True)
@@ -180,9 +180,12 @@ class ProductRecords(models.Model):
         except Exception as e:
             print(e)
             return 'Not applicable'
+    def delete_flag_display(self, product_code):
+        num = ProductRecords.objects.get(pk=product_code).delete_flag
+        return True if num == 1 else False
     
     def suppliername(self):
-        return DataOwners.objects.get(pk=self.ct_supplier_id).owner
+        return str(self.ct_supplier_id) + ' - ' +str(DataOwners.objects.get(pk=self.ct_supplier_id).owner)
 
     def supplierCurrency(self):
         return DataOwners.objects.get(pk=self.ct_supplier_id).supplierpurchasecurrency
