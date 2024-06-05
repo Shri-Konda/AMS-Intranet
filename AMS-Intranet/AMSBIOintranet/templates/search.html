@@ -1,0 +1,174 @@
+{% load static %}
+{% load render_table from django_tables2 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Search Products</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="{% static 'assets/img/favicon.JPG' %}" rel="icon">
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header id="header" class="fixed-top header-inner-pages">
+    <div class="container d-flex align-items-center">
+
+      <a href="index"><img class="header_img" src="{% static 'assets/img/amsbio_logo.png' %}" alt="amsbio_logo"></a>
+
+
+      <nav class="nav-menu d-none d-lg-block">
+
+        <ul>
+          <li><a href="index">Home</a></li>
+
+          <li class="drop-down"><a href=" ">Database</a>
+            <ul>
+              <li><a href="AddNewSupplier">Add New Supplier</a></li>
+              <li><a href="Search">Search Products</a></li>
+              <li><a href="EditSingleProduct/LoadDefaultView">Edit Single Product</a></li>
+              <li><a href="similarProducts/3011-100">Similar Products</a></li>
+              <li><a href="CurrencyValues">Currency Values</a></li>
+            </ul>
+          </li>
+          <li class="drop-down"><a href="#">Courier</a>
+            <ul>
+              <li class="drop-down"><a href="#">FedEx</a>
+                <ul>
+                  <li><a href="../Courier/FedexUK">FedEx UK</a></li>
+                  <li><a href="../Courier/FedexUSA">FedEx USA</a></li>
+                </ul>
+              </li>
+              <li><a href="../Courier/DHL">DHL</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Search Products</h2>
+          <ol>
+            <li><a href="index">Home</a></li>
+            <li>Search Products</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12">
+            <form style="margin-bottom: 20px;" method="POST" id="form1">
+              {% csrf_token %}
+              <div class="form-group row" style="margin-left: 60px;">
+                <label for="Prod" class="sr-only">Search by Product Code: </label>
+                <div class="input-group col-sm-5">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Search</div>
+                  </div>
+                  <input type="text" id="Prod" name="Prod" placeholder="Product Code/Supplier Product Code"
+                    class="form-control">
+                </div>
+                <label for="Prod" class="sr-only">Search by Description:</label>
+                <div class="input-group col-sm-5">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Search</div>
+                  </div>
+                  <input type="text" id="Desc" name="Desc" form="form1" placeholder="Description" class="form-control">
+                </div>
+                <div class="col-sm-2" style="text-align: left;">
+                  <button id="btn_search_db" class="btn btn-danger" form="form1"><strong>Go</strong></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% if msg %}
+      <!-- Generates the main table-->
+      <div class="content" style="width: 90%; margin:0 auto; margin-top: 20px; overflow-x:auto;">
+        <div
+          style="white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); border-radius: 5px; height: 550px;">
+          <h3 style="color: red; font-weight: bold; text-align: center;">Available Products:</h3>
+          {% render_table obj %}
+          <br>
+          <h3 style="color: red; font-weight: bold; text-align: center;">Deleted Products:</h3>
+          {% render_table obj_deleted_items %}
+        </div>
+        {% else %}
+        <!-- Handles error message if product ID is not entered at all -->
+        <div class="container" style="text-align: center; margin:auto;">
+          <br>
+          {{ obj }}
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script type="text/javascript">
+    // Instead of running order_by query on MySQL, Let JS handle the sorting based on Product Code
+    var table = document.querySelector("#testimonials > div.content > div > div > table > tbody");
+    function sortTable(col_index) {
+      var rows, switching, i, x, y, shouldSwitch;
+      switching = true
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[col_index];
+          y = rows[i + 1].getElementsByTagName("TD")[col_index];
+          if (x.innerHTML > y.innerHTML) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
+    sortTable(1)
+  </script>
+
+</body>
+
+</html>
