@@ -1,0 +1,6 @@
+.vscode
+%SystemRoot%system32inetsrvappcmd
+intranet.log
+venv3.7
+venv
+.env
