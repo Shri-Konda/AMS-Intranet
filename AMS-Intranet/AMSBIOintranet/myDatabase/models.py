@@ -185,7 +185,10 @@ class ProductRecords(models.Model):
         return True if num == 1 else False
     
     def suppliername(self):
-        return str(self.ct_supplier_id) + ' - ' +str(DataOwners.objects.get(pk=self.ct_supplier_id).owner)
+        return str(DataOwners.objects.get(pk=self.ct_supplier_id).owner)    
+    
+    def concat_supplier_id(self):
+        return f"{self.ct_supplier_id} - {self.suppliername()}"
 
     def supplierCurrency(self):
         return DataOwners.objects.get(pk=self.ct_supplier_id).supplierpurchasecurrency
