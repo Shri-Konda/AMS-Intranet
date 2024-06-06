@@ -12,11 +12,13 @@ def editProductRecords(pk):
     Product = ProductRecords.objects.get(pk=pk)
     ProdForm = EditProductForm(instance=Product)
     owner = Product.suppliername()
+    supplier_id_concat = Product.concat_supplier_id()
     business_unit_manager = Product.bumName(owner)
     delete_flag = Product.delete_flag_display(pk)
     bundle_components = Product.bundle_components(pk)
     username = ''
     ProdForm.initial['business_unit_manager'] = business_unit_manager
+    ProdForm.initial['supplier'] = supplier_id_concat
     ProdForm.initial['delete_flag'] = delete_flag
     ProdForm.initial['owner'] = owner
     ProdForm.initial['bundle'] = bundle_components

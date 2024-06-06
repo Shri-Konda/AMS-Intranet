@@ -5,8 +5,9 @@ from django import forms
 # Django class for generating model form for 'ProductRecords' table
 class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
-    owner = forms.CharField(max_length=64, disabled=True, required=False)
+    # owner = forms.CharField(max_length=64, disabled=True, required=False)
     business_unit_manager = forms.CharField(max_length=64, disabled=True, required=False)
+    supplier = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
     # # Use TypedChoiceField for the delete_flag
@@ -65,7 +66,8 @@ class EditProductForm(forms.ModelForm):
                 #   "supplier_category_2",
                 #   "supplier_category_3",
                 #   "supplier_lead_time",
-                  "owner",
+                # "owner",
+                  "supplier",
                   "business_unit_manager",
                 #   "ct_supplier_id",
                 #   "listing_precedence",
