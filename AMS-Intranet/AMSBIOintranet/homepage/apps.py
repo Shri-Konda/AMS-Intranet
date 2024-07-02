@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class HomeConfig(AppConfig):
-    name = 'home'
+    name = 'homepage'
+    verbose_name = 'home'

@@ -63,6 +63,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'AMSBIOintranet.urls'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -106,7 +108,7 @@ DATABASES = {
         'USER': user,
         'PASSWORD': password,
         'PORT': port,
-        'HOST': '10.0.0.20',
+        'HOST': '10.0.0.40',
         # 'TEST': {
         #     'NAME': 'test_ams',
         # }
