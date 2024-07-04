@@ -63,6 +63,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'AMSBIOintranet.urls'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

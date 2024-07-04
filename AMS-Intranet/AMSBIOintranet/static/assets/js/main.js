@@ -210,6 +210,13 @@
   //   //   $(this).toggleClass('btn icofont-minus-circle');
   //   // });
   // });
+  
+  // $(document).on('click', '#btnProdForm', function (e) {
+  //   e.preventDefault(); // Prevent the default button click behavior
+  //   if (confirm("Do you want to keep the description unchanged in the next price list update?")) {
+  //       $('#ProdForm').submit(); // If the user confirms, trigger the form submit event
+  //   };
+  // });
 
   // JS for form submission at 'edit single product' page for product records table | Ajax call
   $(document).on('submit', '#ProdForm', function (e) {

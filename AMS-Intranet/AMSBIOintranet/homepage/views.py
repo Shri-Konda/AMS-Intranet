@@ -120,13 +120,14 @@ def track_request(params):
     #     f.write(response.text)
     json_response = json.loads(response.text)
     for ele in json_response['items']:
-        for key, val in ele.items():
+        ele_keys = list(ele.keys())  # Make a copy of the keys
+        for key in ele_keys:
             if key == 'billing_address':
                 name_container = ele.pop(key)
                 try:
                     ele['purchasing_institute'] = name_container['company']
-                except:
-                    ele['purchasing_institute'] = name_container['firstname'] + ' ' +  name_container['lastname']
+                except KeyError:
+                    ele['purchasing_institute'] = name_container['firstname'] + ' ' + name_container['lastname']
             else:
                 pass
     col_headers = list((json_response['items'][0]).keys())

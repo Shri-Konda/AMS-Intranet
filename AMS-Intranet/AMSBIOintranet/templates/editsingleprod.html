@@ -124,7 +124,7 @@
                     {% endfor %}
                   </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-danger" id="btnProdForm" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
+                <button type="submit" class="btn btn-danger" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
               </form>
             </div>
             <div class="col-md-6" style="padding: 2%; padding-left: 20%;"> <!--Display message for no categories-->
@@ -156,7 +156,7 @@
                   {% endfor %}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-danger" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
+                <button type="submit" class="btn btn-danger" id="btnProdForm" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
               </form>
             </div>
             <div id="techform_container" class="col-md-6" style="padding-left: 5%;"> <!--Output the Edit Tech form-->
@@ -191,7 +191,7 @@
           {% endif %}
         </div>  
       {% endif %}
-    </section>
+    </section> 
 
 
   </main>
@@ -205,6 +205,15 @@
   <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
 
   <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <!-- <script>
+    $(document).on('click', '#btnProdForm', function (e) {
+      e.preventDefault(); // Prevent the default button click behavior
+      if (confirm("DO you want to keep the description unchanged?")) {
+        $('#ProdForm').submit(); // If the user confirms, trigger the form submit event
+      }
+    });
+  </script> -->
 
   <script type="text/javascript">
     var usd_sell_price = document.querySelector("#id_sell_price_usd").value;
