@@ -108,7 +108,7 @@ DATABASES = {
         'USER': user,
         'PASSWORD': password,
         'PORT': port,
-        'HOST': '10.0.0.40',
+        'HOST': '10.0.0.20',
         # 'TEST': {
         #     'NAME': 'test_ams',
         # }
