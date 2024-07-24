@@ -10,19 +10,6 @@ class EditProductForm(forms.ModelForm):
     supplier = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
-    # # Use TypedChoiceField for the delete_flag
-    # DELETE_FLAG_CHOICES = [
-    #     (True, 'Yes'),
-    #     (False, 'No'),
-    # ]
-    # delete_flag = forms.TypedChoiceField(
-    #     choices=DELETE_FLAG_CHOICES,
-    #     coerce=lambda x: x == 'True',
-    #     required=False,
-    #     widget=forms.Select
-    #     label = 'Discontinued'
-
-    # )
 
 
     def __init__(self, *args, **kwargs):
@@ -44,6 +31,7 @@ class EditProductForm(forms.ModelForm):
                   "delete_flag",
                   "description",
                   "long_description",
+                  "price_change_only",
                   "packsize",
                   "bundle",
                   "purchase_nett_price",
@@ -79,7 +67,6 @@ class EditProductForm(forms.ModelForm):
                 #   "previous_purchase_price",
                 #   "price_change_flag",
                 #   "price_change_percent",
-                #   "is_in_website",
                 #   "is_in_odoo",
                   "special_shipping"]
 

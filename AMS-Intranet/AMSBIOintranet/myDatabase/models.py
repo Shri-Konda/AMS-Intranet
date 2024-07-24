@@ -158,7 +158,7 @@ class ProductRecords(models.Model):
     previous_purchase_price = models.FloatField(blank=True, null=True)
     price_change_flag = models.IntegerField(blank=True, null=True)
     price_change_percent = models.FloatField(blank=True, null=True)
-    is_in_website = models.IntegerField(blank=True, null=True)
+    price_change_only = models.BooleanField(verbose_name="Update price only", blank=True, null=True)
     is_in_odoo = models.IntegerField(blank=True, null=True)
     special_shipping = models.CharField(max_length=255, blank=True, null=True)
 
@@ -182,6 +182,10 @@ class ProductRecords(models.Model):
             return 'Not applicable'
     def delete_flag_display(self, product_code):
         num = ProductRecords.objects.get(pk=product_code).delete_flag
+        return True if num == 1 else False
+    
+    def price_change_only_display(self, product_code):
+        num = ProductRecords.objects.get(pk=product_code).price_change_only
         return True if num == 1 else False
     
     def suppliername(self):
