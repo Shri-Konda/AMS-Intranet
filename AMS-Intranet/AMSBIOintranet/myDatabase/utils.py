@@ -15,13 +15,13 @@ def editProductRecords(pk):
     supplier_id_concat = Product.concat_supplier_id()
     business_unit_manager = Product.bumName(owner)
     delete_flag = Product.delete_flag_display(pk)
-    price_change_only = Product.price_change_only_display(pk)
+    price_update_only = Product.price_update_only_display(pk)
     bundle_components = Product.bundle_components(pk)
     username = ''
     ProdForm.initial['business_unit_manager'] = business_unit_manager
     ProdForm.initial['supplier'] = supplier_id_concat
     ProdForm.initial['delete_flag'] = delete_flag
-    ProdForm.initial[' price_change_only'] = price_change_only
+    ProdForm.initial['price_update_only'] = price_update_only
     ProdForm.initial['owner'] = owner
     ProdForm.initial['bundle'] = bundle_components
     ProdForm.initial['username'] = username

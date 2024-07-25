@@ -31,7 +31,7 @@ class EditProductForm(forms.ModelForm):
                   "delete_flag",
                   "description",
                   "long_description",
-                  "price_change_only",
+                  "price_update_only",
                   "packsize",
                   "bundle",
                   "purchase_nett_price",
