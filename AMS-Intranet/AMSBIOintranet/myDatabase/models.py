@@ -129,7 +129,7 @@ class ProductRecords(models.Model):
     long_description = models.TextField(blank=True, null=True)
     packsize = models.CharField(max_length=256, blank=True, null=True)
     delete_flag = models.BooleanField(verbose_name="Discontinued", blank=True, null=True)
-    website_flag = models.BooleanField(verbose_name="Should be on the website", blank=True, null=True)
+    website_flag = models.BooleanField(verbose_name="Website Visibility", blank=True, null=True)
     purchase_nett_price = models.FloatField(blank=True, null=True)
     supplier_list_price = models.FloatField(blank=True, null=True)
     sell_price_gbp = models.FloatField(blank=True, null=True)
