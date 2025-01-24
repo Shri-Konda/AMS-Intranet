@@ -1,11 +1,14 @@
 import json, os
 import getpass
 from datetime import datetime
+from django.db import connection
+from asgiref.sync import sync_to_async
+from django.db.utils import DatabaseError
 
 from .forms import EditProductForm, EditTechDetailsForm
 from .tables import (CurrencyTable, ProductRecordsTable)
 from .models import (MasterCurrencies, ProductRecords, ProductRecordsTech,
-                     NwCategoryLowestNodes, DataOwners, Currencies)
+                     NwCategoryLowestNodes, DataOwners, Currencies, PriceCalculator)
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -251,3 +254,29 @@ def similarProducts(request, pk="3011-100"):
             return categoryWiseProductSorting(category, pk, request)
         except NwCategoryLowestNodes.DoesNotExist:
             return setGeneralContext(request=request, msg='Categories do not exist!')
+
+
+def selling_prices(request):
+    sell_prices = []
+    supplier_id = None
+    purchase_nett_price = 0
+    error_message = None
+
+    if request.method == 'POST':
+        supplier_id = request.POST.get('supplier_id')
+        purchase_nett_price = request.POST.get('purchase_nett_price')
+
+        try:
+            purchase_nett_price = float(purchase_nett_price)
+            sell_prices, error_message = PriceCalculator.calculate_selling_prices(
+                purchase_nett_price, int(supplier_id)
+            )
+        except ValueError:
+            error_message = "Invalid purchase price or supplier ID."
+
+    return render(request, 'selling_prices.html', {
+        'supplier_id': supplier_id,
+        'purchase_nett_price': purchase_nett_price,
+        'sell_prices': sell_prices,
+        'error_message': error_message
+    })

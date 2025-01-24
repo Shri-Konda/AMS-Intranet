@@ -13,4 +13,7 @@ urlpatterns = [
     # path('techrecords',views.techRecords, name = 'techrecords'), # used for ajax call
     path('formsubmit',views.FormSubmit, name = 'formsubmit'), # used for ajax call
     path('similarProducts/<str:pk>/',views.similarProducts, name= 'similarProducts'),
+    path('sellingPrices/', views.selling_prices, name='selling_prices'),
+
+
 ]

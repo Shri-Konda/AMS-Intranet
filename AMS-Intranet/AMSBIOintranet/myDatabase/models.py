@@ -55,6 +55,7 @@ class Currencies(models.Model):
     
 
 class DataOwners(models.Model):
+    currencyid = models.IntegerField()
     dat_id = models.AutoField(primary_key=True)
     # Field name made lowercase.
     owner = models.CharField(db_column='Owner', max_length=64)
@@ -84,6 +85,14 @@ class DataOwners(models.Model):
     currencyid = models.PositiveIntegerField(blank=True, null=True)
     usa_market_flag_id = models.PositiveIntegerField(blank=True, null=True, default=1)
 
+    @staticmethod
+    def get_dat_cur_id(supplier_id):
+        try:
+            data_owner = DataOwners.objects.get(dat_id=supplier_id)
+            return data_owner.currencyid
+        except DataOwners.DoesNotExist:
+            return None
+
     def __str__(self):
         return self.owner
 
@@ -98,6 +107,16 @@ class MasterCurrencies(models.Model):
     from_currency_id = models.PositiveIntegerField()
     to_currency_id = models.PositiveIntegerField()
     exchange_rate = models.FloatField()
+
+    @staticmethod
+    def get_exchange_rate(from_currency_id1, to_currency_id1):
+        try:
+            currency_pair = MasterCurrencies.objects.get(
+                from_currency_id=from_currency_id1, to_currency_id=to_currency_id1
+            )
+            return currency_pair.exchange_rate
+        except MasterCurrencies.DoesNotExist:
+            return None
 
     def symbolfrom(self):
         symbol = [1,2,3,4,6,7]
@@ -646,3 +665,83 @@ class NcbiGeneInfo(models.Model):
         managed = False
         db_table = 'ncbi_gene_info'
         app_label = 'myDatabase'
+
+class DefaultSupplierPricingRules(models.Model):
+    PRICERULEID = models.AutoField(primary_key=True)
+    MIN_SELL_PRICE_CURRENCY_ID = models.IntegerField()
+    NETT_PRICE_LOWER_LEVEL = models.FloatField()
+    NETT_PRICE_UPPER_LEVEL = models.FloatField()
+    LEVEL_MULTIPLER = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'defaultsupplierpricingrules'
+        app_label = 'myDatabase'
+
+class PriceCalculator:
+
+    @staticmethod
+    def calculate_selling_prices(pr_nett_price, pr_dat_id):
+        # Step 1: Fetch DAT_CUR_ID based on pr_dat_id
+        try:
+            data_owner = DataOwners.objects.get(dat_id=pr_dat_id)
+            dat_cur_id = data_owner.currencyid
+        except DataOwners.DoesNotExist:
+            return None, "DAT_ID not found"
+
+        # Step 2: Get the exchange rate for USD
+        margin_exchangerate_usd = MasterCurrencies.get_exchange_rate(dat_cur_id, 2)  # USD currency_id = 2
+        if not margin_exchangerate_usd:
+            return None, "Exchange rate not found for USD"
+
+        # Step 3: Calculate margin price in USD
+        margin_price_usd = round(pr_nett_price * margin_exchangerate_usd, 2)
+
+        # Step 4: Fetch the margin price percentage based on price range
+        try:
+            pricing_rule = DefaultSupplierPricingRules.objects.get(
+                MIN_SELL_PRICE_CURRENCY_ID=5,  # Assuming 5 is USD
+                NETT_PRICE_LOWER_LEVEL__lte = margin_price_usd,
+                NETT_PRICE_UPPER_LEVEL__gte = margin_price_usd
+            )
+            margin_price_percent = int(pricing_rule.LEVEL_MULTIPLER) / 100
+        except DefaultSupplierPricingRules.DoesNotExist:
+            return None, "Pricing rule not found for margin"
+
+        # Step 5: Calculate nett price plus margin
+        nett_price_plus_margin = round(pr_nett_price / (1 - margin_price_percent), 0)
+
+        # Step 6: Calculate the selling price for different currencies
+        currencies = ['GBP', 'EUR', 'CHF', 'USD']
+        currency_ids = {'GBP': 4, 'EUR': 1, 'CHF': 3, 'USD': 2}
+        sell_prices = []
+        def round_to_nearest_5(value):
+            return ceil(value / 5) * 5
+
+        for currency in currencies:
+            currency_id = currency_ids[currency]
+            exchange_rate = MasterCurrencies.get_exchange_rate(dat_cur_id, currency_id)
+            if exchange_rate:
+                sell_price = float(round_to_nearest_5(round(nett_price_plus_margin * exchange_rate, 2)))
+                sell_prices.append({
+                    'currency_name': currency,
+                    'sell_price': sell_price,
+                    'exchange_rate': exchange_rate
+                })
+
+        # Step 8: Add rest of the world price (ROW)
+        usd_price_entry = next((item for item in sell_prices if item['currency_name'] == 'USD'), None)
+        if usd_price_entry:
+            rest_of_world_price = float(round_to_nearest_5(usd_price_entry['sell_price'] * 1.2))
+            sell_prices.append({
+                'currency_name': 'ROW',
+                'sell_price': rest_of_world_price,
+                'exchange_rate': '-'
+            })
+
+        sell_prices.append({
+            'currency_name': 'MARGIN_PERCENT',
+            'sell_price': margin_price_percent * 100,  # Display as a percentage
+            'exchange_rate': '-'
+        })
+        return sell_prices, None  # Return sell prices and error message (None if no error)
