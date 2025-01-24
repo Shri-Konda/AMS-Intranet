@@ -1,0 +1,111 @@
+ <!-- Load static files -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selling Prices</title>
+
+    <link href="{% static 'assets/img/favicon.JPG' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            width: 200px;
+        }
+        .form-group input {
+            width: 300px;
+        }
+        .form-group button {
+        margin-left: 200px; /* Align button with inputs */
+        }
+    </style>
+
+   
+    
+</head>
+<body>
+    <!-- Header Section -->
+    <!-- Header Section (Replicating the second page's header style) -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+          <!-- Logo Section -->
+          <a href=" "><img class="header_img" src="{% static 'assets/img/amsbio_logo.png' %}" alt="amsbio_logo"></a>
+      
+          <!-- Navigation Menu -->
+          <nav class="nav-menu d-none d-lg-block">
+            <ul>
+              <li><a id="home" href="/">Home</a></li>              
+            </ul>
+          </nav>
+        </div>
+      </header>
+    <!-- Main Content -->
+    <div style="padding: 20px; margin-top: 80px;">
+        
+        <h1>Selling Prices Calculator</h1>
+        <br>
+
+        <!-- Form for submitting Supplier ID and Purchase Nett Price -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="supplier_id">Supplier ID:</label>
+                <input type="number" id="supplier_id" name="supplier_id" required value="{{ supplier_id }}">
+            </div>
+            <div class="form-group">
+                <label for="purchase_nett_price">Purchase Nett Price:</label>
+                <input type="text" id="purchase_nett_price" name="purchase_nett_price" required value="{{ purchase_nett_price }}">
+            </div>
+            <div class="form-group">
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+
+        <!-- Display error message if any -->
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+
+        <!-- Display the selling prices if they exist -->
+        {% if sell_prices %}
+            <br>
+            
+            <table border="2">
+                <thead>
+                    <tr>
+                        <th>Currency</th>
+                        <th>Selling Price</th>
+                        <th>Exchange Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for price in sell_prices %}
+                    <tr>
+                        <td>{{ price.currency_name }}</td>
+                        <td style="text-align: center;">{{ price.sell_price }}</td>
+                        <td style="text-align: center;">{{ price.exchange_rate }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
