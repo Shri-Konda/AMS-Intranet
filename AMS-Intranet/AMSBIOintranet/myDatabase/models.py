@@ -722,7 +722,7 @@ class PriceCalculator:
             currency_id = currency_ids[currency]
             exchange_rate = MasterCurrencies.get_exchange_rate(dat_cur_id, currency_id)
             if exchange_rate:
-                sell_price = round_to_nearest_5(round(nett_price_plus_margin * exchange_rate, 2))
+                sell_price = float(round_to_nearest_5(round(nett_price_plus_margin * exchange_rate, 2)))
                 sell_prices.append({
                     'currency_name': currency,
                     'sell_price': sell_price,
@@ -732,7 +732,7 @@ class PriceCalculator:
         # Step 8: Add rest of the world price (ROW)
         usd_price_entry = next((item for item in sell_prices if item['currency_name'] == 'USD'), None)
         if usd_price_entry:
-            rest_of_world_price = round_to_nearest_5(usd_price_entry['sell_price'] * 1.2)
+            rest_of_world_price = float(round_to_nearest_5(usd_price_entry['sell_price'] * 1.2))
             sell_prices.append({
                 'currency_name': 'ROW',
                 'sell_price': rest_of_world_price,
