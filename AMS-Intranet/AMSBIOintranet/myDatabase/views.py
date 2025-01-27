@@ -1,9 +1,7 @@
 import json, os
 import getpass
 from datetime import datetime
-from django.db import connection
-from asgiref.sync import sync_to_async
-from django.db.utils import DatabaseError
+from operator import itemgetter
 
 from .forms import EditProductForm, EditTechDetailsForm
 from .tables import (CurrencyTable, ProductRecordsTable)
@@ -261,6 +259,8 @@ def selling_prices(request):
     supplier_id = None
     purchase_nett_price = 0
     error_message = None
+    owners_data = DataOwners.get_owners_ids_and_currency()
+    sorted_owners_data = sorted(owners_data, key=itemgetter('owner'))
 
     if request.method == 'POST':
         supplier_id = request.POST.get('supplier_id')
@@ -278,5 +278,6 @@ def selling_prices(request):
         'supplier_id': supplier_id,
         'purchase_nett_price': purchase_nett_price,
         'sell_prices': sell_prices,
+        'owners_data': sorted_owners_data,
         'error_message': error_message
     })

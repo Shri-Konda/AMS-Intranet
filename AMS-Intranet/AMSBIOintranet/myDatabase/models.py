@@ -60,6 +60,7 @@ class DataOwners(models.Model):
     # Field name made lowercase.
     owner = models.CharField(db_column='Owner', max_length=64)
     # Field name made lowercase.
+    delete_flag = models.PositiveIntegerField(db_column='delete_flag', default=0)
     supplierpurchasecurrency = models.CharField(
         db_column='SupplierPurchaseCurrency', max_length=4, blank=True, null=True)
     productpurchasebrand = models.PositiveIntegerField(
@@ -93,6 +94,13 @@ class DataOwners(models.Model):
         except DataOwners.DoesNotExist:
             return None
 
+    def get_owners_ids_and_currency():
+        try:
+            results = DataOwners.objects.filter(delete_flag=0).values('dat_id', 'supplierpurchasecurrency', 'owner')
+            return results
+        except DataOwners.DoesNotExist:
+            return None
+            
     def __str__(self):
         return self.owner
 

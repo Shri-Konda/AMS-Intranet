@@ -108,4 +108,30 @@
     <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
+
+<head>
+    <title>Owners Data</title>
+</head>
+<body>
+    <h1>Suppliers' Data</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Supplier ID</th>
+                <th>Purchase Currency</th>
+                <th>Supplier Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for owner in owners_data %}
+            <tr>
+                <td>{{ owner.dat_id }}</td>
+                <td>{{ owner.supplierpurchasecurrency }}</td>
+                <td>{{ owner.owner }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
 </html>
