@@ -723,8 +723,27 @@ class PriceCalculator:
         currencies = ['GBP', 'EUR', 'CHF', 'USD']
         currency_ids = {'GBP': 4, 'EUR': 1, 'CHF': 3, 'USD': 2}
         sell_prices = []
-        def round_to_nearest_5(value):
-            return ceil(value / 5) * 5
+        def round_to_nearest_5(pr_number):
+            # Round the input number to the nearest integer
+            rounded_int_number = round(pr_number)
+
+            # Find the remainder when divided by 10
+            int_mod = rounded_int_number % 10
+
+            # Determine the rounded value based on the remainder
+            if int_mod > 5:
+                # Shift up to the next multiple of 10
+                int_shift = 10 - int_mod
+                return_value = rounded_int_number + int_shift
+            elif 0 < int_mod < 5:
+                # Shift up to the next multiple of 5
+                int_shift = 5 - int_mod
+                return_value = rounded_int_number + int_shift
+            else:
+                # No shift needed, the number is already a multiple of 5
+                return_value = rounded_int_number
+
+            return return_value
 
         for currency in currencies:
             currency_id = currency_ids[currency]
