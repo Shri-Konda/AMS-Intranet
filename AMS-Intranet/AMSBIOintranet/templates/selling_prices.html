@@ -108,4 +108,49 @@
     <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
 </body>
+
+<head>
+    <title>Owners Data</title>
+</head>
+<body style="padding: 20px; margin-top: 80px;">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            text-align: left;
+            margin-left: 20px; /* Adjust this value to move the table further to the right */
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+       
+    </style>
+
+    <h1>Suppliers' Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Supplier ID</th>
+                <th>Purchase Currency</th>
+                <th>Supplier Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for owner in owners_data %}
+            <tr>
+                <td>{{ owner.dat_id }}</td>
+                <td>{{ owner.supplierpurchasecurrency }}</td>
+                <td>{{ owner.owner }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
 </html>

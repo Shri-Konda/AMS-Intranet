@@ -60,6 +60,7 @@ class DataOwners(models.Model):
     # Field name made lowercase.
     owner = models.CharField(db_column='Owner', max_length=64)
     # Field name made lowercase.
+    delete_flag = models.PositiveIntegerField(db_column='delete_flag', default=0)
     supplierpurchasecurrency = models.CharField(
         db_column='SupplierPurchaseCurrency', max_length=4, blank=True, null=True)
     productpurchasebrand = models.PositiveIntegerField(
@@ -93,6 +94,13 @@ class DataOwners(models.Model):
         except DataOwners.DoesNotExist:
             return None
 
+    def get_owners_ids_and_currency():
+        try:
+            results = DataOwners.objects.filter(delete_flag=0).values('dat_id', 'supplierpurchasecurrency', 'owner')
+            return results
+        except DataOwners.DoesNotExist:
+            return None
+            
     def __str__(self):
         return self.owner
 
@@ -715,8 +723,27 @@ class PriceCalculator:
         currencies = ['GBP', 'EUR', 'CHF', 'USD']
         currency_ids = {'GBP': 4, 'EUR': 1, 'CHF': 3, 'USD': 2}
         sell_prices = []
-        def round_to_nearest_5(value):
-            return ceil(value / 5) * 5
+        def round_to_nearest_5(pr_number):
+            # Round the input number to the nearest integer
+            rounded_int_number = round(pr_number)
+
+            # Find the remainder when divided by 10
+            int_mod = rounded_int_number % 10
+
+            # Determine the rounded value based on the remainder
+            if int_mod > 5:
+                # Shift up to the next multiple of 10
+                int_shift = 10 - int_mod
+                return_value = rounded_int_number + int_shift
+            elif 0 < int_mod < 5:
+                # Shift up to the next multiple of 5
+                int_shift = 5 - int_mod
+                return_value = rounded_int_number + int_shift
+            else:
+                # No shift needed, the number is already a multiple of 5
+                return_value = rounded_int_number
+
+            return return_value
 
         for currency in currencies:
             currency_id = currency_ids[currency]
