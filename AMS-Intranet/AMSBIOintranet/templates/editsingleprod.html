@@ -141,11 +141,8 @@
                     <button class="btn btn-primary" disabled>Product Details</button>
                   </div>
                 </div>
-                {% for field in ProdForm %}
-                <!-- Add this section to display the supplier name -->
-                <!-- <div class="container" style="text-align: center;">
-                  <p>Supplier Name: {{ owner }}</p>
-                </div> -->
+                <!-- {% for field in ProdForm %}
+                
                 <div class="form-group{% if field.errors %} invalid{% endif %} row">
                   <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
                   <div class="col-sm-8">
@@ -155,11 +152,36 @@
                     <p class="help-block">{{ error }}</p>
                   {% endfor %}
                 </div>
+                {% endfor %} -->
+                {% for field in ProdForm %}
+                  {% if forloop.counter <= 10 %}
+                    <!-- Show first 10 fields -->
+                    <div class="form-group row">
+                      <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                      <div class="col-sm-8">
+                        {{ field }}
+                      </div>
+                    </div>
+                  {% else %}
+                    <!-- Hide the rest initially -->
+                    <div class="form-group row extra-fields" style="display: none;">
+                      <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                      <div class="col-sm-8">
+                        {{ field }}
+                      </div>
+                    </div>
+                  {% endif %}
                 {% endfor %}
+
+                <!-- "More" Button -->
+                <button type="button" id="showMoreBtn" class="btn btn-secondary" style="margin:auto; display:block; margin-top: 10px;">
+                  Show More
+                </button>
+                <br>
                 <button type="submit" class="btn btn-danger" id="btnProdForm" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
               </form>
             </div>
-            <div id="techform_container" class="col-md-6" style="padding-left: 5%;"> <!--Output the Edit Tech form-->
+            <div id="techform_container" class="col-md-6" style="padding-left: 5%;"> 
               <form id='TechForm' method="POST">
                 {% csrf_token %}
                 <div class="form-group row" style="text-align: center; margin-bottom: 20px;">
@@ -173,17 +195,37 @@
                 </div>
                 {% for field in TechForm %}
                   {% if field.id_for_label in attrs %}
-                  <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                    <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                    <div class="col-sm-8">
-                      {{ field }}
-                    </div>
-                    {% for error in field.errors %}
-                      <p class="help-block">{{ error }}</p>
-                    {% endfor %}
-                  </div>
+                    {% if forloop.counter <= 9 %}
+                      <!-- Show first 10 fields -->
+                      <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                        <div class="col-sm-8">
+                          {{ field }}
+                        </div>
+                        {% for error in field.errors %}
+                          <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      <!-- Hide the rest initially -->
+                      <div class="form-group{% if field.errors %} invalid{% endif %} row extra-fields" style="display: none;">
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                        <div class="col-sm-8">
+                          {{ field }}
+                        </div>
+                        {% for error in field.errors %}
+                          <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                   {% endif %}
                 {% endfor %}
+
+                <!-- "More" Button for TechForm -->
+                <button type="button" id="showMoreTechFormBtn" class="btn btn-secondary" style="margin:auto; display:block; margin-top: 10px;">
+                  Show More
+                </button>
+                <br>
                 <button type="submit" class="btn btn-danger" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
               </form>
             </div>
@@ -220,6 +262,27 @@
     var rest_of_world_price = document.querySelector("#id_sell_price_rest_of_world_usd");
     var usd_price_float = parseFloat(usd_sell_price);
     rest_of_world_price.value = 5 * Math.ceil((usd_price_float * 1.2)/5);
+
+    document.getElementById("showMoreBtn").addEventListener("click", function() {
+    let extraFields = document.querySelectorAll(".extra-fields");
+    
+    extraFields.forEach(field => {
+      field.style.display = "flex";  // Show hidden fields
+    });
+
+    this.style.display = "none"; // Hide "More" button after clicking
+  });
+
+   // "Show More" button for TechForm
+   document.getElementById("showMoreTechFormBtn").addEventListener("click", function() {
+    let extraFields = document.querySelectorAll(".extra-fields");
+    
+    extraFields.forEach(field => {
+      field.style.display = "flex";  // Show hidden fields
+    });
+
+    this.style.display = "none"; // Hide the "Show More" button after clicking
+  });
   </script>
   
 </body>

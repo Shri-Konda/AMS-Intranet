@@ -6,7 +6,7 @@ from myDatabase.models import NwCategoryIds, NwCategoryLowestNodes
 from .forms import *
 
 
-def editProductRecords(pk):
+def editProductRecords(pk, europa_prices_gbp=None, europa_prices_eur=None):
     """ Helper function for generating the 'Edit Product' form! """
     ProdForm = EditProductForm()
     Product = ProductRecords.objects.get(pk=pk)
@@ -25,6 +25,8 @@ def editProductRecords(pk):
     ProdForm.initial['owner'] = owner
     ProdForm.initial['bundle'] = bundle_components
     ProdForm.initial['username'] = username
+    ProdForm.initial['europa_sell_price_gbp'] = europa_prices_gbp if europa_prices_gbp is not None else 0
+    ProdForm.initial['europa_sell_price_eur'] = europa_prices_eur if europa_prices_eur is not None else 0
     ProdForm.fields['product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['supplier_product_code'].widget.attrs['readonly'] = True
     ProdForm.fields['last_updated_user'].widget.attrs['readonly'] = True

@@ -139,16 +139,26 @@ def editSingleProduct(request, pk):
     """ Main function for rendering the Edit Product page! """
     flag = True
     nocategory = False
+    europa_prices_gbp = None
+    europa_prices_eur = None
+    try:
+            europa_prices = ProductRecords.get_europa_selling_prices(pk)
+            europa_prices_gbp = europa_prices['sell_price_gbp']
+            europa_prices_eur = europa_prices['sell_price_eur']
+    except Exception as e:
+            print(e)
+    
+
     if request.method == "POST" and 'btnSubmitCode' in request.POST:
-        code = request.POST["ProdCode"]
-        try:
+        code = request.POST["ProdCode"]       
+        try:            
             # Case the product was deleted
             if ProductRecords.objects.get(pk=code).delete_flag == 1:
                 flag = True
                 return render(request, 'editsingleprod.html', {'msg': "This product was deleted", 'flag': flag})
             # Case where no categories are defined.
             if ProductRecords.objects.get(pk=code).category_1 == 0:
-                ProdForm = editProductRecords(code)
+                ProdForm = editProductRecords(code, europa_prices_gbp, europa_prices_eur)
                 noTechCategory = "No Categories defined!"
                 nocategory = True
                 context = {'ProdForm': ProdForm,
@@ -158,7 +168,7 @@ def editSingleProduct(request, pk):
                 cat = loadCategory(code)  # generating level 1 category
                 attributes = ['id_product_code'] + \
                     ['id_' + ele for ele in list(cat[0].values())[0]]
-                ProdForm = editProductRecords(code)
+                ProdForm = editProductRecords(code, europa_prices_gbp, europa_prices_eur)
                 TechForm = editTechDetails(code)
                 flag = False
                 TwoCategories = True
@@ -178,10 +188,11 @@ def editSingleProduct(request, pk):
             flag = True
             return render(request, 'editsingleprod.html', {'msg': "Enter a valid product code", 'flag': flag})
     else:
+        
         try:
             # Case where no categories are defined.
             if ProductRecords.objects.get(pk=pk).category_1 == 0:
-                ProdForm = editProductRecords(pk)
+                ProdForm = editProductRecords(pk, europa_prices_gbp, europa_prices_eur)
                 noTechCategory = "No Categories defined!"
                 nocategory = True
                 context = {'ProdForm': ProdForm,
@@ -197,7 +208,7 @@ def editSingleProduct(request, pk):
                     cat = loadCategory(pk)  # generating level 1 category
                     attributes = ['id_product_code'] + \
                         ['id_' + ele for ele in list(cat[0].values())[0]]
-                    ProdForm = editProductRecords(pk)
+                    ProdForm = editProductRecords(pk, europa_prices_gbp, europa_prices_eur)
                     TechForm = editTechDetails(pk)
                     flag = False
                     TwoCategories = True
@@ -207,7 +218,7 @@ def editSingleProduct(request, pk):
                     cat = loadCategory(pk)  # generating level 1 category
                     attributes = ['id_product_code'] + \
                         ['id_' + ele for ele in list(cat[0].values())[0]]
-                    ProdForm = editProductRecords(pk)
+                    ProdForm = editProductRecords(pk, europa_prices_gbp, europa_prices_eur)
                     flag = False
                     TwoCategories = True
                 if len(cat) > 1:  # check if 2 categories exists 
@@ -221,6 +232,8 @@ def editSingleProduct(request, pk):
                     TwoCategories = False
                     context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
+                
+                
                 return render(request, 'editsingleprod.html', context)
         except Exception as e:
             flag = True

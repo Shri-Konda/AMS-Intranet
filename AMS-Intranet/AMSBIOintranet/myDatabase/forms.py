@@ -10,6 +10,8 @@ class EditProductForm(forms.ModelForm):
     supplier = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
+    europa_sell_price_gbp = forms.CharField(max_length=64, disabled=True, required=False)
+    europa_sell_price_eur = forms.CharField(max_length=64, disabled=True, required=False)
 
 
     def __init__(self, *args, **kwargs):
@@ -17,12 +19,6 @@ class EditProductForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs.update(
                 {'class': 'form-control', 'rows': '0', 'cols': '10'})
-            
-        # if self.instance:
-        #     owner = self.instance.owner
-        #     ct_supplier_id = self.instance.ct_supplier_id
-        #     self.fields['owner'].initial = f"{owner} + {ct_supplier_id}"
-
     class Meta:
         model = ProductRecords
         fields = ["username",
@@ -42,6 +38,8 @@ class EditProductForm(forms.ModelForm):
                   "sell_price_chf",
                   "sell_price_usd",
                   "sell_price_rest_of_world_usd",
+                  "europa_sell_price_gbp",
+                  "europa_sell_price_eur",
                   "storage_conditions",
                   "shipping_temperature",
                   "commodity_code",

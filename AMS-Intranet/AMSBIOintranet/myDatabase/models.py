@@ -8,6 +8,8 @@
 from django.db import models
 import regex as re
 from math import ceil
+from django.db import connections
+import json
 
 from homepage.models import liveCurrencyRate
 
@@ -282,6 +284,16 @@ class ProductRecords(models.Model):
 
     def restOfWorldCurr(self):
         return 5 * ceil((self.sell_price_usd * 1.2)/5)
+    
+    def get_europa_selling_prices(product_code):
+        # Direct database query using connection cursor
+        try:
+            with connections['sysdb'].cursor() as cursor:                
+                cursor.execute("SELECT europa_selling_prices(%s)", [product_code])
+                result = cursor.fetchone()
+                return json.loads(result[0]) if result else None
+        except Exception as e:
+            print(e)
 
 
 class ProductRecordsTech(models.Model):
