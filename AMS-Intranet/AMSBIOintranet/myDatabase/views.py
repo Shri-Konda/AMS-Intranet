@@ -170,6 +170,11 @@ def editSingleProduct(request, pk):
                     ['id_' + ele for ele in list(cat[0].values())[0]]
                 ProdForm = editProductRecords(code, europa_prices_gbp, europa_prices_eur)
                 TechForm = editTechDetails(code)
+                 #  Split TechForm fields into two halves
+                tech_fields = list(TechForm)
+                mid_index = len(tech_fields) // 2
+                TechForm_col1 = tech_fields[:mid_index]  # First half
+                TechForm_col2 = tech_fields[mid_index:]  # Second half
                 flag = False
                 TwoCategories = True
                 if len(cat) > 1:  # check if 2 categories exists
@@ -177,11 +182,11 @@ def editSingleProduct(request, pk):
                         'id_' + ele for ele in list(cat[1].values())[0]]
                     merged_attrs = attributes + \
                         list(set(attributes2) - set(attributes))
-                    context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'cat2': list(cat[1].keys())[0], 'catflag': TwoCategories, 'attrs': merged_attrs}
                 else:
                     TwoCategories = False
-                    context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 return render(request, 'editsingleprod.html', context)
         except:
@@ -210,6 +215,10 @@ def editSingleProduct(request, pk):
                         ['id_' + ele for ele in list(cat[0].values())[0]]
                     ProdForm = editProductRecords(pk, europa_prices_gbp, europa_prices_eur)
                     TechForm = editTechDetails(pk)
+                    tech_fields = list(TechForm)
+                    mid_index = len(tech_fields) // 2
+                    TechForm_col1 = tech_fields[:mid_index]
+                    TechForm_col2 = tech_fields[mid_index:]
                     flag = False
                     TwoCategories = True
                 except Exception as e:
@@ -226,11 +235,11 @@ def editSingleProduct(request, pk):
                         'id_' + ele for ele in list(cat[1].values())[0]]
                     merged_attrs = attributes + \
                         list(set(attributes2) - set(attributes))
-                    context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'cat2': list(cat[1].keys())[0], 'catflag': TwoCategories, 'attrs': merged_attrs}
                 else:
                     TwoCategories = False
-                    context = {'ProdForm': ProdForm, 'TechForm': TechForm, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 
                 
