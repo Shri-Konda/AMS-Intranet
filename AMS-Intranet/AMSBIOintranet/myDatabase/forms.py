@@ -6,13 +6,18 @@ from django import forms
 class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
     # owner = forms.CharField(max_length=64, disabled=True, required=False)
+    purchase_nett_price = forms.CharField(max_length=64, disabled=True, required=False)
     business_unit_manager = forms.CharField(max_length=64, disabled=True, required=False)
     supplier = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
     europa_sell_price_gbp = forms.CharField(max_length=64, disabled=True, required=False)
     europa_sell_price_eur = forms.CharField(max_length=64, disabled=True, required=False)
-
+    last_change_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}), disabled=True, required=False)
+    last_updated_user = forms.CharField(max_length=64, disabled=True, required=False)
+    product_code = forms.CharField(max_length=64, disabled=True, required=False)
+    supplier_product_code = forms.CharField(max_length=64, disabled=True, required=False)
+    commodity_code = forms.CharField(max_length=64, required=False)
 
     def __init__(self, *args, **kwargs):
         super(EditProductForm, self).__init__(*args, **kwargs)
