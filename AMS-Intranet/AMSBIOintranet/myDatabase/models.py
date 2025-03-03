@@ -317,7 +317,7 @@ class ProductRecordsTech(models.Model):
     aa_sequence = models.TextField(blank=True, null=True)
     application = models.TextField(blank=True, null=True)
     cas_no = models.TextField(blank=True, null=True)
-    selection_marker = models.TextField(blank=True, null=True)
+    anticoagulant = models.TextField(blank=True, null=True)
     promoter = models.TextField(blank=True, null=True)
     tag_position = models.TextField(blank=True, null=True)
     purification = models.TextField(blank=True, null=True)
@@ -443,7 +443,7 @@ class NwAttributes12Molecularbiology(models.Model):
     application = models.TextField()
     species = models.TextField()
     cas_no = models.TextField()
-    selection_marker = models.TextField()
+    anticoagulant = models.TextField()
     promoter = models.TextField()
     tag_position = models.TextField()
     purification = models.TextField()
@@ -581,7 +581,7 @@ class NwAttributes15Cellscellculture(models.Model):
     tumorigenic = models.TextField()
     components = models.TextField()
     preparation = models.TextField()
-    selection_marker = models.TextField()
+    anticoagulant = models.TextField()
 
     class Meta:
         managed = False

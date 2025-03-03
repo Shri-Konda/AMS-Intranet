@@ -108,7 +108,7 @@ class TechRecordsTable_Molecularbiology(TechRecords_Base, tables.Table):
             "tag",
             "aa_sequence",
             "species",
-            "selection_marker",
+            "anticoagulant",
             "promoter",
             "tag_position",
             "purification"]
@@ -165,7 +165,7 @@ class TechRecordsTable_CellsCellCulture(TechRecords_Base, tables.Table):
             "tag_position",
             "serotype",
             "promoter",
-            "selection_marker"]
+            "anticoagulant"]
 
 
 # Django Child class inheriting from 'TechRecords_Base' for generating the table for the below Category
