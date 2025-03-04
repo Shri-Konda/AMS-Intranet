@@ -111,6 +111,7 @@ def FormSubmit(request):
     for ele in json_data:
         temp = list(ele.values())
         form_data[temp[0]] = temp[1]
+    print("✅ Received form data:", form_data)  # Debugging
     form_data.pop('csrfmiddlewaretoken')
     if 'supplier_product_code' in form_data.keys():
         getpass.getuser().upper()
