@@ -54,6 +54,7 @@
               <li><a href="../Courier/DHL">DHL</a></li>
             </ul>
           </li>
+          <li><a id="price_calculator" href="../../../myDatabase/sellingPrices/">Price Calculator</a></li>
         </ul>
 
       </nav>
@@ -78,7 +79,7 @@
     </section>
 
     <section id="testimonials" class="testimonials">
-      <div class="container text-center" style="margin-bottom: 20px;">
+      <!-- <div class="container text-center" style="margin-bottom: 20px;">
         <div class="row">
           <div class="col-md-12">
             <form method="POST">
@@ -97,7 +98,7 @@
             </form>
           </div>
         </div>
-      </div >
+      </div > -->
       {% if flag %} <!--Output if proper product code is not entered-->
         <div class="container" style="text-align: center;">
             <i>{{msg}}</i>
@@ -105,7 +106,7 @@
       {% else %}
         {% if nocategory %} <!--Output if no categories are defined-->
           <div class="row" style="padding-top: 10px; border-radius: 5px; background-color: #fafafa; width:85%; margin:auto;">
-            <div id="prodform_container" class="col-md-6"> <!--Output only the Edit Product form-->
+            <div id="prodform_container" class="col-md-6" style="padding-right: 0;"> <!--Output only the Edit Product form-->
               <form id='ProdForm' method="POST">
                 {% csrf_token %}
                 <div class="form-group row" style="text-align: center; margin-bottom: 20px;">
@@ -133,60 +134,110 @@
           </div>
           {% else %} <!--Output if categories are defined-->
           <div class="row" style="padding-top: 10px; border-radius: 5px; background-color: #fafafa; width:88%; margin:auto;">
-            <div id="prodform_container" class="col-md-6" style="padding-right: 5%;"> <!--Output the Edit Product form-->
+            <div id="prodform_container" class="col-md-12" style="padding-right: 0;">
               <form id='ProdForm' method="POST">
                 {% csrf_token %}
+          
+                <!-- Product Details Button -->
                 <div class="form-group row" style="text-align: center; margin-bottom: 20px;">
                   <div class="col-sm-12">
-                    <button class="btn btn-primary" disabled>Product Details</button>
+                    <h2>Product Details</h2>
                   </div>
                 </div>
-                {% for field in ProdForm %}
-                <!-- Add this section to display the supplier name -->
-                <!-- <div class="container" style="text-align: center;">
-                  <p>Supplier Name: {{ owner }}</p>
-                </div> -->
-                <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                  <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                  <div class="col-sm-8">
-                    {{ field }}
-                  </div>
-                  {% for error in field.errors %}
-                    <p class="help-block">{{ error }}</p>
-                  {% endfor %}
-                </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-danger" id="btnProdForm" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
-              </form>
-            </div>
-            <div id="techform_container" class="col-md-6" style="padding-left: 5%;"> <!--Output the Edit Tech form-->
-              <form id='TechForm' method="POST">
-                {% csrf_token %}
-                <div class="form-group row" style="text-align: center; margin-bottom: 20px;">
-                  <div class="col-sm-12">
-                    {% if catflag %}
-                      <button class="btn btn-primary" disabled>{{cat1}}, {{cat2}}</button>
-                    {% else %}
-                      <button class="btn btn-primary" disabled>{{cat1}}</button>
-                    {% endif %}
-                  </div>
-                </div>
-                {% for field in TechForm %}
-                  {% if field.id_for_label in attrs %}
-                  <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                    <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                    <div class="col-sm-8">
-                      {{ field }}
-                    </div>
-                    {% for error in field.errors %}
-                      <p class="help-block">{{ error }}</p>
+          
+                <!-- Start the row for two columns -->
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    {% for field in ProdForm %}
+                      {% if forloop.counter <= 14 %}  <!-- Show first half of fields -->
+                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                          <div class="col-sm-8">
+                            {{ field }}
+                          </div>
+                          {% for error in field.errors %}
+                            <p class="help-block">{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
                     {% endfor %}
                   </div>
-                  {% endif %}
-                {% endfor %}
-                <button type="submit" class="btn btn-danger" style="margin:auto; display:block; padding-top: 10px; margin-bottom: 10px;">Submit</button>
+          
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    {% for field in ProdForm %}
+                      {% if forloop.counter > 14 %}  <!-- Show second half of fields -->
+                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                          <div class="col-sm-8">
+                            {{ field }}
+                          </div>
+                          {% for error in field.errors %}
+                            <p class="help-block">{{ error }}</p>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+          
+                <!-- Centered Submit Button -->
+                <div class="form-group row" style="display: flex; justify-content: center; margin-top: 20px;">
+                  <button type="submit" class="btn btn-danger" id="btnProdForm" style="padding-top: 10px; margin-bottom: 30px; width: 30%;">Submit Product Changes</button>
+                </div>
               </form>
             </div>
+          </div>
+            <!-- "Show More" Button (Visible Initially) -->
+            <button type="button" id="toggleTechFormBtn" class="btn btn-secondary" style="margin:auto; display:block; margin-top: 10px;">
+              Show Tech Info
+            </button>
+            <br>
+            <!-- Hidden Form -->
+            <div id="techform_container" class="col-md-12" style="padding-left: 0; display: none;">
+              <form id='TechForm' method="POST">
+                {% csrf_token %}
+
+                <div class="row" style="padding-top: 10px; border-radius: 5px; background-color: #fafafa; width:88%; margin:auto;">
+                  <!-- First Column -->
+                  <div class="col-md-6">
+                    {% for field in TechForm_col1 %}
+                      <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                        <div class="col-sm-8">
+                          {{ field }}
+                        </div>
+                        {% for error in field.errors %}
+                          <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                
+                  <!-- Second Column -->
+                  <div class="col-md-6">
+                    {% for field in TechForm_col2 %}
+                      <div class="form-group{% if field.errors %} invalid{% endif %} row extra-fields" style="display: none;">
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                        <div class="col-sm-8">
+                          {{ field }}
+                        </div>
+                        {% for error in field.errors %}
+                          <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <!-- Centered Submit Button -->
+                <div class="form-group row" style="display: flex; justify-content: center; margin-top: 20px;">
+                  <button type="submit" class="btn btn-danger" style="padding-top: 10px; margin-bottom: 10px; width: 30%;">Submit Tech Changes</button>
+                </div>
+              </form>
+            </div>
+
           </div>
           {% endif %}
         </div>  
@@ -220,6 +271,21 @@
     var rest_of_world_price = document.querySelector("#id_sell_price_rest_of_world_usd");
     var usd_price_float = parseFloat(usd_sell_price);
     rest_of_world_price.value = 5 * Math.ceil((usd_price_float * 1.2)/5);
+
+    document.getElementById("toggleTechFormBtn").addEventListener("click", function() {
+    var formContainer = document.getElementById("techform_container");
+    var hiddenFields = document.querySelectorAll(".extra-fields"); // Select all hidden fields
+    
+    if (formContainer.style.display === "none" || formContainer.style.display === "") {
+      formContainer.style.display = "block"; // Show the entire form
+      hiddenFields.forEach(field => field.style.display = "flex"); // Show hidden fields
+      this.textContent = "Hide Tech Info";
+    } else {
+      formContainer.style.display = "none"; // Hide the form
+      hiddenFields.forEach(field => field.style.display = "none"); // Hide the fields again
+      this.textContent = "Show Tech Info";
+    }
+  });
   </script>
   
 </body>

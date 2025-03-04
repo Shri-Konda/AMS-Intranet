@@ -6,23 +6,24 @@ from django import forms
 class EditProductForm(forms.ModelForm):
     sell_price_rest_of_world_usd = forms.CharField(max_length=64, disabled=True, required=False)
     # owner = forms.CharField(max_length=64, disabled=True, required=False)
+    purchase_nett_price = forms.CharField(max_length=64, disabled=True, required=False)
     business_unit_manager = forms.CharField(max_length=64, disabled=True, required=False)
     supplier = forms.CharField(max_length=64, disabled=True, required=False)
     bundle = forms.CharField(max_length=64, disabled=True, required=False)
     username = forms.CharField(max_length=64, disabled=False, required=True)
-
+    europa_sell_price_gbp = forms.CharField(max_length=64, disabled=True, required=False)
+    europa_sell_price_eur = forms.CharField(max_length=64, disabled=True, required=False)
+    last_change_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}), disabled=True, required=False)
+    last_updated_user = forms.CharField(max_length=64, disabled=True, required=False)
+    product_code = forms.CharField(max_length=64, disabled=True, required=False)
+    supplier_product_code = forms.CharField(max_length=64, disabled=True, required=False)
+    commodity_code = forms.CharField(max_length=64, required=False)
 
     def __init__(self, *args, **kwargs):
         super(EditProductForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs.update(
                 {'class': 'form-control', 'rows': '0', 'cols': '10'})
-            
-        # if self.instance:
-        #     owner = self.instance.owner
-        #     ct_supplier_id = self.instance.ct_supplier_id
-        #     self.fields['owner'].initial = f"{owner} + {ct_supplier_id}"
-
     class Meta:
         model = ProductRecords
         fields = ["username",
@@ -35,6 +36,11 @@ class EditProductForm(forms.ModelForm):
                   "price_update_only",
                   "packsize",
                   "bundle",
+                  "storage_conditions",
+                  "shipping_temperature",
+                  "category_1",
+                  "category_2",                  
+                  "research_area_1",
                   "purchase_nett_price",
                   "supplier_list_price",
                   "sell_price_gbp",
@@ -42,12 +48,14 @@ class EditProductForm(forms.ModelForm):
                   "sell_price_chf",
                   "sell_price_usd",
                   "sell_price_rest_of_world_usd",
-                  "storage_conditions",
-                  "shipping_temperature",
+                  "europa_sell_price_gbp",
+                  "europa_sell_price_eur",
                   "commodity_code",
-                  "category_1",
-                  "category_2",
-                  "research_area_1",
+                  "supplier",
+                  "business_unit_manager",
+                  "last_updated_user",
+                  "last_change_date",
+                  "special_shipping"]
                 #   "research_area_2",
                 #   "research_area_3",
                 #   "research_area_4",
@@ -56,19 +64,14 @@ class EditProductForm(forms.ModelForm):
                 #   "supplier_category_3",
                 #   "supplier_lead_time",
                 # "owner",
-                  "supplier",
-                  "business_unit_manager",
                 #   "ct_supplier_id",
                 #   "listing_precedence",
-                  "last_updated_user",
-                  "last_change_date",
                 #   "price_calculation_type",
                 #   "new_product_flag",
                 #   "previous_purchase_price",
                 #   "price_change_flag",
                 #   "price_change_percent",
-                #   "is_in_odoo",
-                  "special_shipping"]
+                #   "is_in_odoo",]
 
 
 # Django class for generating model form for 'ProductRecordsTech' table

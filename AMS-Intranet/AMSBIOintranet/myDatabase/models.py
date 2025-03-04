@@ -8,6 +8,8 @@
 from django.db import models
 import regex as re
 from math import ceil
+from django.db import connections
+import json
 
 from homepage.models import liveCurrencyRate
 
@@ -282,6 +284,16 @@ class ProductRecords(models.Model):
 
     def restOfWorldCurr(self):
         return 5 * ceil((self.sell_price_usd * 1.2)/5)
+    
+    def get_europa_selling_prices(product_code):
+        # Direct database query using connection cursor
+        try:
+            with connections['sysdb'].cursor() as cursor:                
+                cursor.execute("SELECT europa_selling_prices(%s)", [product_code])
+                result = cursor.fetchone()
+                return json.loads(result[0]) if result else None
+        except Exception as e:
+            print(e)
 
 
 class ProductRecordsTech(models.Model):
@@ -305,7 +317,7 @@ class ProductRecordsTech(models.Model):
     aa_sequence = models.TextField(blank=True, null=True)
     application = models.TextField(blank=True, null=True)
     cas_no = models.TextField(blank=True, null=True)
-    selection_marker = models.TextField(blank=True, null=True)
+    anticoagulant = models.TextField(blank=True, null=True)
     promoter = models.TextField(blank=True, null=True)
     tag_position = models.TextField(blank=True, null=True)
     purification = models.TextField(blank=True, null=True)
@@ -431,7 +443,7 @@ class NwAttributes12Molecularbiology(models.Model):
     application = models.TextField()
     species = models.TextField()
     cas_no = models.TextField()
-    selection_marker = models.TextField()
+    anticoagulant = models.TextField()
     promoter = models.TextField()
     tag_position = models.TextField()
     purification = models.TextField()
@@ -569,7 +581,7 @@ class NwAttributes15Cellscellculture(models.Model):
     tumorigenic = models.TextField()
     components = models.TextField()
     preparation = models.TextField()
-    selection_marker = models.TextField()
+    anticoagulant = models.TextField()
 
     class Meta:
         managed = False
