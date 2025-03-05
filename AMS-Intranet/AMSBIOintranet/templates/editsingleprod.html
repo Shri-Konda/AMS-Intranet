@@ -149,48 +149,66 @@
                 <!-- Start the row for two columns -->
                 <div class="row">                  
                   <!-- First Column -->
+
                   <div class="col-md-6">
                     {% for field in ProdForm %}
-                      {% if forloop.counter <= 14 %}  <!-- Show first half of fields -->
-                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                          <div class="col-sm-8">
-                            {% if field.name in "sell_price_gbp,sell_price_eur,sell_price_chf,sell_price_usd,sell_price_rest_of_world_usd,europa_sell_price_gbp,europa_sell_price_eur,purchase_nett_price" and field.value == 0.0 %}
+                      {% if field.name != "price_calculation_type" %}  <!-- Skip this field completely -->
+                        {% if forloop.counter <= 14 %}  <!-- Show first half of fields -->
+                          <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                            <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                            <div class="col-sm-8">
                               {{ field }}
-                              <span class="text-muted" style="display:block; font-size:14px; margin-top:4px;color:red;">Enquire</span>
-                            {% else %}
-                              {{ field }}
-                            {% endif %}
+                              
+                              <!-- Display "Enquire" when value is 0.0 -->
+                              {% if field.name in price_fields and field.value == 0.0 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Enquire</span>
+                              {% endif %}
+                  
+                              <!-- Display "Price set by the BUM" when price_calculation_type == 2 -->
+                              {% if field.name in price_fields and price_calculation_type == 2 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Price set by the BUM</span>
+                              {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                              <p class="help-block">{{ error }}</p>
+                            {% endfor %}
                           </div>
-                          {% for error in field.errors %}
-                            <p class="help-block">{{ error }}</p>
-                          {% endfor %}
-                        </div>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </div>
+                  
+
           
                   <!-- Second Column -->
                   <div class="col-md-6">
                     {% for field in ProdForm %}
-                      {% if forloop.counter > 14 %}  <!-- Show second half of fields -->
-                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                          <div class="col-sm-8">
-                            {% if field.name in "sell_price_gbp,sell_price_eur,sell_price_chf,sell_price_usd,sell_price_rest_of_world_usd,europa_sell_price_gbp,europa_sell_price_eur,purchase_nett_price" and field.value == 0 %}
+                      {% if field.name != "price_calculation_type" %}  <!-- Skip this field completely -->
+                        {% if forloop.counter > 14 %}  <!-- Show first half of fields -->
+                          <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                            <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                            <div class="col-sm-8">
                               {{ field }}
-                              <span class="text-muted" style="display:block; font-size:14px; margin-top:4px;color:red;">Enquire</span>
-                            {% else %}
-                              {{ field }}
-                            {% endif %}
+                              
+                              <!-- Display "Enquire" when value is 0.0 -->
+                              {% if field.name in price_fields and field.value == 0.0 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Enquire</span>
+                              {% endif %}
+                  
+                              <!-- Display "Price set by the BUM" when price_calculation_type == 2 -->
+                              {% if field.name in price_fields and price_calculation_type == 2 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Price set by the BUM</span>
+                              {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                              <p class="help-block">{{ error }}</p>
+                            {% endfor %}
                           </div>
-                          {% for error in field.errors %}
-                            <p class="help-block">{{ error }}</p>
-                          {% endfor %}
-                        </div>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </div>
+                  
                 </div>
           
                 <!-- Centered Submit Button -->

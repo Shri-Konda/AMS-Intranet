@@ -142,6 +142,9 @@ def editSingleProduct(request, pk):
     nocategory = False
     europa_prices_gbp = None
     europa_prices_eur = None
+    product = ProductRecords.objects.get(pk=pk)
+    price_fields = [
+        "sell_price_gbp", "sell_price_eur", "sell_price_chf", "sell_price_usd"]
     try:
             europa_prices = ProductRecords.get_europa_selling_prices(pk)
             europa_prices_gbp = europa_prices['sell_price_gbp']
@@ -162,7 +165,7 @@ def editSingleProduct(request, pk):
                 ProdForm = editProductRecords(code, europa_prices_gbp, europa_prices_eur)
                 noTechCategory = "No Categories defined!"
                 nocategory = True
-                context = {'ProdForm': ProdForm,
+                context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm,
                            'NoTechCategory': noTechCategory, 'nocategory': nocategory}
                 return render(request, 'editsingleprod.html', context)
             else:
@@ -183,11 +186,11 @@ def editSingleProduct(request, pk):
                         'id_' + ele for ele in list(cat[1].values())[0]]
                     merged_attrs = attributes + \
                         list(set(attributes2) - set(attributes))
-                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'cat2': list(cat[1].keys())[0], 'catflag': TwoCategories, 'attrs': merged_attrs}
                 else:
                     TwoCategories = False
-                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 return render(request, 'editsingleprod.html', context)
         except:
@@ -201,7 +204,7 @@ def editSingleProduct(request, pk):
                 ProdForm = editProductRecords(pk, europa_prices_gbp, europa_prices_eur)
                 noTechCategory = "No Categories defined!"
                 nocategory = True
-                context = {'ProdForm': ProdForm,
+                context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm,
                            'NoTechCategory': noTechCategory, 'nocategory': nocategory}
                 return render(request, 'editsingleprod.html', context)
             else:
@@ -236,11 +239,11 @@ def editSingleProduct(request, pk):
                         'id_' + ele for ele in list(cat[1].values())[0]]
                     merged_attrs = attributes + \
                         list(set(attributes2) - set(attributes))
-                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'cat2': list(cat[1].keys())[0], 'catflag': TwoCategories, 'attrs': merged_attrs}
                 else:
                     TwoCategories = False
-                    context = {'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
+                    context = {'price_fields': price_fields, 'price_calculation_type': product.price_calculation_type, 'ProdForm': ProdForm, 'TechForm_col1': TechForm_col1,  'TechForm_col2': TechForm_col2, 'flag': flag, 'cat1': list(cat[0].keys())[0],
                                'catflag': TwoCategories, 'attrs': attributes}
                 
                 
