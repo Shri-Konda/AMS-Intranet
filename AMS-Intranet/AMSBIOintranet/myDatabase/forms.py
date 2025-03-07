@@ -18,6 +18,7 @@ class EditProductForm(forms.ModelForm):
     product_code = forms.CharField(max_length=64, disabled=True, required=False)
     supplier_product_code = forms.CharField(max_length=64, disabled=True, required=False)
     commodity_code = forms.CharField(max_length=64, required=False)
+    price_calculation_type = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(EditProductForm, self).__init__(*args, **kwargs)
@@ -41,6 +42,7 @@ class EditProductForm(forms.ModelForm):
                   "category_1",
                   "category_2",                  
                   "research_area_1",
+                #   "price_calculation_type",
                   "purchase_nett_price",
                   "supplier_list_price",
                   "sell_price_gbp",
@@ -63,10 +65,9 @@ class EditProductForm(forms.ModelForm):
                 #   "supplier_category_2",
                 #   "supplier_category_3",
                 #   "supplier_lead_time",
-                # "owner",
+                #   "owner",
                 #   "ct_supplier_id",
                 #   "listing_precedence",
-                #   "price_calculation_type",
                 #   "new_product_flag",
                 #   "previous_purchase_price",
                 #   "price_change_flag",

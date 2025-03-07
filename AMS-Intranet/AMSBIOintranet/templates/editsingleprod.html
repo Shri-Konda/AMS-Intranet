@@ -107,7 +107,7 @@
         {% if nocategory %} <!--Output if no categories are defined-->
           <div class="row" style="padding-top: 10px; border-radius: 5px; background-color: #fafafa; width:85%; margin:auto;">
             <div id="prodform_container" class="col-md-6" style="padding-right: 0;"> <!--Output only the Edit Product form-->
-              <form id='ProdForm' method="POST">
+              <form id="ProdForm" method="POST">
                 {% csrf_token %}
                 <div class="form-group row" style="text-align: center; margin-bottom: 20px;">
                   <div class="col-sm-12">
@@ -135,7 +135,7 @@
           {% else %} <!--Output if categories are defined-->
           <div class="row" style="padding-top: 10px; border-radius: 5px; background-color: #fafafa; width:88%; margin:auto;">
             <div id="prodform_container" class="col-md-12" style="padding-right: 0;">
-              <form id='ProdForm' method="POST">
+              <form id="ProdForm" method="POST">
                 {% csrf_token %}
           
                 <!-- Product Details Button -->
@@ -144,42 +144,71 @@
                     <h2>Product Details</h2>
                   </div>
                 </div>
-          
+                <input type="hidden" name="product_code" id="product_code" value="{{ ProdForm.product_code.value }}">
+                <input type="hidden" name="supplier_product_code" id="product_code" value="{{ ProdForm.supplier_product_code.value }}">
                 <!-- Start the row for two columns -->
-                <div class="row">
+                <div class="row">                  
                   <!-- First Column -->
+
                   <div class="col-md-6">
                     {% for field in ProdForm %}
-                      {% if forloop.counter <= 14 %}  <!-- Show first half of fields -->
-                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                          <div class="col-sm-8">
-                            {{ field }}
+                      {% if field.name != "price_calculation_type" %}  <!-- Skip this field completely -->
+                        {% if forloop.counter <= 14 %}  <!-- Show first half of fields -->
+                          <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                            <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                            <div class="col-sm-8">
+                              {{ field }}
+                              
+                              <!-- Display "Enquire" when value is 0.0 -->
+                              {% if field.name in price_fields and field.value == 0.0 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Enquire</span>
+                              {% endif %}
+                  
+                              <!-- Display "Price set by the BUM" when price_calculation_type == 2 -->
+                              {% if field.name in price_fields and price_calculation_type == 2 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Price set by the BUM</span>
+                              {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                              <p class="help-block">{{ error }}</p>
+                            {% endfor %}
                           </div>
-                          {% for error in field.errors %}
-                            <p class="help-block">{{ error }}</p>
-                          {% endfor %}
-                        </div>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </div>
+                  
+
           
                   <!-- Second Column -->
                   <div class="col-md-6">
                     {% for field in ProdForm %}
-                      {% if forloop.counter > 14 %}  <!-- Show second half of fields -->
-                        <div class="form-group{% if field.errors %} invalid{% endif %} row">
-                          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
-                          <div class="col-sm-8">
-                            {{ field }}
+                      {% if field.name != "price_calculation_type" %}  <!-- Skip this field completely -->
+                        {% if forloop.counter > 14 %}  <!-- Show first half of fields -->
+                          <div class="form-group{% if field.errors %} invalid{% endif %} row">
+                            <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label">{{ field.label }}:</label>
+                            <div class="col-sm-8">
+                              {{ field }}
+                              
+                              <!-- Display "Enquire" when value is 0.0 -->
+                              {% if field.name in price_fields and field.value == 0.0 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Enquire</span>
+                              {% endif %}
+                  
+                              <!-- Display "Price set by the BUM" when price_calculation_type == 2 -->
+                              {% if field.name in price_fields and price_calculation_type == 2 %}
+                                <span class="text-muted" style="display:block; font-size:14px; margin-top:4px; color:red;">Price set by the BUM</span>
+                              {% endif %}
+                            </div>
+                            {% for error in field.errors %}
+                              <p class="help-block">{{ error }}</p>
+                            {% endfor %}
                           </div>
-                          {% for error in field.errors %}
-                            <p class="help-block">{{ error }}</p>
-                          {% endfor %}
-                        </div>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </div>
+                  
                 </div>
           
                 <!-- Centered Submit Button -->
